@@ -31,6 +31,7 @@ public class User {
     @Column(nullable = false)
     private Rol id_rol;
     
+    /* Foreign Key*/
     @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
