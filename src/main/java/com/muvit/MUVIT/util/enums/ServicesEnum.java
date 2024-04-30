@@ -1,5 +1,5 @@
 package com.muvit.MUVIT.util.enums;
 
-public enum ServicioEnum {
+public enum ServicesEnum {
     BASIC, PREMIUN
 }
