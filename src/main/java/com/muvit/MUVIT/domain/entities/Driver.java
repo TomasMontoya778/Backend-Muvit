@@ -1,16 +1,23 @@
 package com.muvit.MUVIT.domain.entities;
 
 
+import jakarta.persistence.CascadeType;
+
 import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "driver")
 @Data
@@ -33,5 +40,17 @@ public class Driver {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    private Rol rol;
+
+    private Rol id_rol;
+
+    /* Foreign Key*/
+    @OneToOne(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Service driverService;
+    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Service userService;
+
 }
