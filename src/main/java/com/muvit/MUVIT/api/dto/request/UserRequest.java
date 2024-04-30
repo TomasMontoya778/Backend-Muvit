@@ -1,8 +1,5 @@
 package com.muvit.MUVIT.api.dto.request;
 
-import com.muvit.MUVIT.domain.entities.Rol;
-import com.muvit.MUVIT.util.enums.Dni_type_Enum;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,14 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DriverRequest {
+public class UserRequest {
 
     private String name;
     private String lastName;
-    private Dni_type_Enum DNI_type;
-    private String DNI;
-    private Long phoneNumber;
     private String email;
-
-
+    private Long phoneNumber;
+    
 }

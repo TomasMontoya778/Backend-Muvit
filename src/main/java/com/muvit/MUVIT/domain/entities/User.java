@@ -23,6 +23,7 @@ public class User {
     private String lastName;
     @Column(nullable = false)
     private String email;
-
-    private Long id_rol;
+    @Column(nullable = false, length = 10)
+    private Long phoneNumber;
+    private Rol id_rol;
 }
