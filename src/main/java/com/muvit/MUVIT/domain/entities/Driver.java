@@ -1,6 +1,8 @@
 package com.muvit.MUVIT.domain.entities;
 
 
+import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,13 +25,13 @@ public class Driver {
     @Column(nullable = false, length = 40)
     private String lastName;
     @Column(nullable = false)
-    private String DNI_type;
+    private Dni_type_Enum DNI_type;
     @Column(nullable = false)
-    private Long DNI;
+    private String DNI;
     @Column(nullable = false, length = 10)
     private Long phoneNumber;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    private Rol id_rol;
+    private Rol rol;
 }
