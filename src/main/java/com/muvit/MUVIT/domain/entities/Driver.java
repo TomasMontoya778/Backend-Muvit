@@ -42,15 +42,9 @@ public class Driver {
     @Column(nullable = false)
 
     private Rol id_rol;
-
     /* Foreign Key*/
     @OneToOne(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Service driverService;
-    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Service userService;
-
 }

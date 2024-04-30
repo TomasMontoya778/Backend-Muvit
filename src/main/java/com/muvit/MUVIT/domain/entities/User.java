@@ -1,13 +1,18 @@
 package com.muvit.MUVIT.domain.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "user")
 @NoArgsConstructor
@@ -23,6 +28,12 @@ public class User {
     private String lastName;
     @Column(nullable = false)
     private String email;
-
-    private Long id_rol;
+    @Column(nullable = false)
+    private Rol id_rol;
+    
+    /* Foreign Key*/
+    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Service userService;
 }
