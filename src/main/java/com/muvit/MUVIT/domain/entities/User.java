@@ -28,7 +28,9 @@ public class User {
     private String lastName;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
+    private Long phoneNumber;
+     @Column(nullable = false)
     private Rol id_rol;
     
     /* Foreign Key*/
@@ -36,4 +38,5 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Service userService;
+
 }
