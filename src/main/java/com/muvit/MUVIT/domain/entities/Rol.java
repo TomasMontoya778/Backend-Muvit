@@ -21,4 +21,5 @@ public class Rol {
     private String nameUser;
     @Column(nullable = false)
     private String password;
+    
 }
