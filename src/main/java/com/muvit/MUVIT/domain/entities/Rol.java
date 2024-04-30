@@ -24,4 +24,5 @@ public class Rol {
     @Column(nullable = false)
     private String password;
     private RolEnum rol;
+
 }
