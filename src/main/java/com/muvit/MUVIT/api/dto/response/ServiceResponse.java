@@ -1,7 +1,7 @@
 package com.muvit.MUVIT.api.dto.response;
 
 import com.muvit.MUVIT.util.enums.RolEnum;
-import com.muvit.MUVIT.util.enums.stateServiceEnum;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +21,5 @@ public class ServiceResponse {
     private Double price;
     private String startPoint;
     private String finalPoint;
-    private stateServiceEnum statusService;
+    private StateServiceEnum statusService;
 }

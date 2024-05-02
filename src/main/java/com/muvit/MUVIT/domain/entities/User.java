@@ -1,5 +1,7 @@
 package com.muvit.MUVIT.domain.entities;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,16 +34,15 @@ public class User {
     private String email;
     @Column(nullable = false, length = 10)
     private Long phoneNumber;
-     @Column(nullable = false)
-    private Rol id_rol;
     
     /* Foreign Key*/
-    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id_user", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Service userService;
+    private List<Service> userService;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user_rol", referencedColumnName = "id")
-    private Rol fk_id_rol_user;
+    @JoinColumn(name = "id_user_rol", referencedColumnName = "id_rol")
+    private Rol rol;
     
 }

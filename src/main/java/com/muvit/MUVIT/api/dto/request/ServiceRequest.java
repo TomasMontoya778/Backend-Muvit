@@ -1,6 +1,6 @@
 package com.muvit.MUVIT.api.dto.request;
 import com.muvit.MUVIT.util.enums.RolEnum;
-import com.muvit.MUVIT.util.enums.stateServiceEnum;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,5 +26,5 @@ public class ServiceRequest {
     @NotBlank(message = "Final point is required")
     private String finalPoint;
     @NotBlank(message = "Status of the service is required")
-    private stateServiceEnum statusService;
+    private StateServiceEnum statusService;
 }

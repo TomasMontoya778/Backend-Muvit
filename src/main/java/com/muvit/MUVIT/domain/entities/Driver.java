@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,18 +43,16 @@ public class Driver {
     private Long phoneNumber;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
 
-    private Rol id_rol;
     /* Foreign Key*/
-    @OneToOne(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Service driverService;
+    private List<Service> driverService;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_driver")
-    private Rol fk_id_rol_driver;
+    @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_rol")
+    private Rol rol;
 
     @OneToMany(mappedBy = "id_driver_truck", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
