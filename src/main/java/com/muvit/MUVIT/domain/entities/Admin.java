@@ -22,6 +22,6 @@ public class Admin {
 
     /* Foreign Key */
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_admin_rol", referencedColumnName = "id_admin")
-    private Rol fk_id_rol_admin;
+    @JoinColumn(name = "id_admin_rol", referencedColumnName = "id_rol")
+    private Rol rol;
 }

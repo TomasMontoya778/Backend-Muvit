@@ -1,7 +1,10 @@
 package com.muvit.MUVIT.domain.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import com.muvit.MUVIT.util.enums.RolEnum;
-import com.muvit.MUVIT.util.enums.stateServiceEnum;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,13 +39,18 @@ public class Service {
     @Column(nullable = false)
     private String finalPoint;
     @Column(nullable = false)
-    private stateServiceEnum statusService;
+    private StateServiceEnum statusService;
+    @Column(nullable = false)
+    private LocalDate date;
+    @Column(nullable = false)
+    private LocalTime time;
 
     /*Foreign Keys */
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User id_user;
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_driver", referencedColumnName = "id_driver")
     private Driver id_driver;
 }
