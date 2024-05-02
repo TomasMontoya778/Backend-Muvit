@@ -3,6 +3,8 @@ package com.muvit.MUVIT.domain.entities;
 
 import jakarta.persistence.CascadeType;
 
+import java.util.List;
+
 import com.muvit.MUVIT.util.enums.Dni_type_Enum;
 
 
@@ -14,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,4 +56,9 @@ public class Driver {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_driver")
     private Rol fk_id_rol_driver;
+
+    @OneToMany(mappedBy = "id_driver_truck", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Truck> fk_id_driver_truck;
 }
