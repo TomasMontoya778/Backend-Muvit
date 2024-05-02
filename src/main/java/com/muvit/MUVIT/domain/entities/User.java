@@ -36,7 +36,7 @@ public class User {
     private Rol id_rol;
     
     /* Foreign Key*/
-    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "id_user", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Service userService;
