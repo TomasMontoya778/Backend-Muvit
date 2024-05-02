@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TruckRequest {
-private BodyEnum body;
-private String model;
-private LocalDate soat;
-private LocalDate tecnomecanica;
+     @NotBlank(message = "Bodytruck is required")
+     @NotBlank(message = "Model is required")
+     private String model;
+     @NotBlank(message = "SOAT expiry is required")
+     private LocalDate soat;
+     @NotBlank(message = "tecnomecanica expiry is required")
+     private LocalDate tecnomecanica;
+     private BodyEnum body;
 }
