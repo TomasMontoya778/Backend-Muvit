@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRequest {
 
-    @Size(min = 0, max = 40, message = "El nombre supera la cantidad de caracteres")
-    @NotBlank(message = "El nombre de la compañia es requerido")
+    @Size(min = 0, max = 40, message = "The name exceeds the numbers of characters")
+    @NotBlank(message = "Name is required")
     private String name;
     @NotBlank(message = "Lastname is required")
     @Size(min = 0, max = 20, message = "The surname exceeds the number of characters")

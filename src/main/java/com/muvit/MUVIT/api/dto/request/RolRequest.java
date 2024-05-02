@@ -3,6 +3,7 @@ package com.muvit.MUVIT.api.dto.request;
 import com.muvit.MUVIT.util.enums.RolEnum;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RolRequest {
-private String nameUser;
-private String password;
-private RolEnum rol;
+     @NotBlank(message = "User name is required")
+     @NotBlank(message = "User password is required")
+     private String nameUser;
+     private String password;
+     @NotBlank(message = "User rol is required")
+     private RolEnum rol;
 }
