@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.domain.entities;
 
-
 import java.time.LocalDate;
 
 import com.muvit.MUVIT.util.enums.BodyEnum;
@@ -33,7 +32,6 @@ public class Truck {
   private LocalDate soat;
   @Column(nullable = false)
   private LocalDate tecnomecanica;
-  private Driver id_driver;
 
   /* Foreign Key */
   @ManyToOne(fetch = FetchType.LAZY)

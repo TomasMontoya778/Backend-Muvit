@@ -1,13 +1,7 @@
 package com.muvit.MUVIT.domain.entities;
-
-
 import jakarta.persistence.CascadeType;
-
 import java.util.List;
-
 import com.muvit.MUVIT.util.enums.Dni_type_Enum;
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -57,5 +51,5 @@ public class Driver {
     @OneToMany(mappedBy = "id_driver_truck", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Truck> fk_id_driver_truck;
+    private List<Truck> truck;
 }
