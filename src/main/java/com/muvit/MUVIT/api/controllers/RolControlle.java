@@ -42,8 +42,8 @@ public class RolControlle {
 
     @PostMapping
     public ResponseEntity<RolResponse> insert(
-            @Validated @RequestBody RolRequest company) {
-        return ResponseEntity.ok(this.rolService.create(company));
+            @Validated @RequestBody RolRequest rol) {
+        return ResponseEntity.ok(this.rolService.create(rol));
     }
 
     @DeleteMapping(path = "/{id}")
