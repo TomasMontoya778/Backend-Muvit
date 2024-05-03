@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.api.dto.request;
 
-
 import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.util.enums.Dni_type_Enum;
 

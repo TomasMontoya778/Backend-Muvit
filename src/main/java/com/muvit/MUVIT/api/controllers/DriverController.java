@@ -20,7 +20,6 @@ import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverServic
 
 import lombok.AllArgsConstructor;
 
-
 @RestController
 @RequestMapping("/driver")
 @AllArgsConstructor
@@ -28,7 +27,7 @@ public class DriverController {
     @Autowired
     private final IDriverService driverService;
 
-        @GetMapping
+    @GetMapping
     public ResponseEntity<Page<DriverResponse>> get(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size) {
