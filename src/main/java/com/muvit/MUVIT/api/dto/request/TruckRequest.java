@@ -4,7 +4,6 @@ import com.muvit.MUVIT.util.enums.BodyEnum;
 import java.time.LocalDate;
 
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;

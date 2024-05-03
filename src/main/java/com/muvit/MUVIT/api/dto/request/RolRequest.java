@@ -2,7 +2,6 @@ package com.muvit.MUVIT.api.dto.request;
 
 import com.muvit.MUVIT.util.enums.RolEnum;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;

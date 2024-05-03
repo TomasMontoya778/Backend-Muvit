@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class DriverResponse {
-
     private String id_driver;
     private String name;
     private String lastName;
