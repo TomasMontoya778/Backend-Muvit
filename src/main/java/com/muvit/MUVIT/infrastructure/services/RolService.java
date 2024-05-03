@@ -21,8 +21,7 @@ public class RolService implements IRolService{@Override
 
     @Override
     public RolResponse create(RolRequest request) {
-        // TODO Auto-generated method stub
-        return null;
+        
     }
 
     @Override

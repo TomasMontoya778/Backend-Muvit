@@ -26,4 +26,6 @@ public class ServiceResponse {
     private LocalDate date;
     private LocalTime time;
     private StateServiceEnum statusService;
+    private UserResponse userResponse;
+    private DriverResponse driver;
 }
