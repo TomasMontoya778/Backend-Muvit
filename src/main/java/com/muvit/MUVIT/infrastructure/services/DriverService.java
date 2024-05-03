@@ -21,7 +21,7 @@ public class DriverService implements IDriverService{
 
     @Override
     public DriverResponse getById(String id) {
-        // TODO Auto-generated method stub
+        
         return this.entityToDriverResponse(this.find(id));
     }
 
