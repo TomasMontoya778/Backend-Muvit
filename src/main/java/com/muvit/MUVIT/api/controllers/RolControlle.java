@@ -48,9 +48,9 @@ public class RolControlle {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
-        this.rolService.delete(id);
+        //this.rolService.delete(id);
 
-        return ResponseEntity.noContent().build();
+        return null;
     }
 
     @PutMapping(path = "/{id}")
@@ -58,6 +58,7 @@ public class RolControlle {
             @PathVariable String id, // id por url
             @Validated @RequestBody RolRequest company // compañia actualizada
     ) {
-        return ResponseEntity.ok(this.rolService.update(id, company));
+        //return ResponseEntity.ok(this.rolService.update(id, company));
+        return null;
     }
 }
