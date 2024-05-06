@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import com.muvit.MUVIT.util.enums.RolEnum;
+import com.muvit.MUVIT.util.enums.ServicesEnum;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +30,8 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id_service;
     @Column(nullable = false)
-    private RolEnum typeService;
+    @Enumerated(EnumType.STRING)
+    private ServicesEnum typeService;
     @Column(nullable = false)
     private String distance;
     @Column(nullable = true)
@@ -39,13 +43,14 @@ public class Service {
     @Column(nullable = false)
     private String finalPoint;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private StateServiceEnum statusService;
     @Column(nullable = false)
     private LocalDate date;
     @Column(nullable = false)
     private LocalTime time;
 
-    /*Foreign Keys */
+    /* Foreign Keys */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User id_user;
