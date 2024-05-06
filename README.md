@@ -17,5 +17,5 @@ MUVIT
 
 ## Trello Board
 
-Any additional information goes here
+https://trello.com/b/mKub2o6h/muvit
 
