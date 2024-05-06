@@ -1,6 +1,6 @@
 package com.muvit.MUVIT.api.dto.response;
 
-import com.muvit.MUVIT.domain.entities.Rol;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +17,6 @@ public class UserResponse {
     private String name;
     private String lastName;
     private String email;
-    private Long phoneNumber;
-    private Rol id_rol;
+    private String phoneNumber;
+    private RolResponse rol;
 }

@@ -33,7 +33,7 @@ public class User {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false, length = 10)
-    private Long phoneNumber;
+    private String phoneNumber;
     
     /* Foreign Key*/
     @OneToMany(mappedBy = "id_user", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
