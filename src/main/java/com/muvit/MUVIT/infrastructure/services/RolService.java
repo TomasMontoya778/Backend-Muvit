@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.infrastructure.services;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IRolService;
 import com.muvit.MUVIT.util.enums.RolEnum;
+import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -45,10 +45,12 @@ public class RolService implements IRolService {
         return null;
     }
 
+    private Rol find(Long id){
+        return this.rolRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Rol"));
+    } 
     @Override
     public RolResponse getById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        return this.entityToResponse(this.find(id));
     }
 
     private Rol requestToEntity(RolRequest request, Rol rol) {

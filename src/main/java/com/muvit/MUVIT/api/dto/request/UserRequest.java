@@ -1,5 +1,6 @@
 package com.muvit.MUVIT.api.dto.request;
 
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,6 @@ public class UserRequest {
     private String email;
     @Size(min = 0, max = 10, message = "The phone number exceeds the numbers of characters")
     @NotBlank(message = "Phone number is required")
-    private Long phoneNumber;
-    
+    private String phoneNumber;
+    private Long rol;
 }
