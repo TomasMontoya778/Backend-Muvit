@@ -29,7 +29,7 @@ public class UserController {
         @GetMapping
     public ResponseEntity<Page<UserResponse>> get(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "2") int size) {
+            @RequestParam(defaultValue = "10") int size) {
 
         return ResponseEntity.ok(this.userService.getAll(page - 1, size));
     }
