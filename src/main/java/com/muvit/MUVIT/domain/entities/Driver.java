@@ -34,7 +34,7 @@ public class Driver {
     @Column(nullable = false)
     private String DNI;
     @Column(nullable = false, length = 10)
-    private Long phoneNumber;
+    private String phoneNumber;
     @Column(nullable = false)
     private String email;
 

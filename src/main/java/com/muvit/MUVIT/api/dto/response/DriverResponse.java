@@ -18,7 +18,7 @@ public class DriverResponse {
     private String lastName;
     private Dni_type_Enum DNI_type;
     private String DNI;
-    private Long phoneNumber;
+    private String phoneNumber;
     private String email;
     private Rol rol;
 }

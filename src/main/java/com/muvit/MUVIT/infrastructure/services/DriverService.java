@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.muvit.MUVIT.api.dto.request.DriverRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
+import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
+import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import lombok.AllArgsConstructor;
 public class DriverService implements IDriverService{
 
     private final DriverRepository objDriverRepository;
+    private final RolRepository objRolRepository;
 
     @Override
     public DriverResponse getById(String id) {
@@ -27,8 +30,10 @@ public class DriverService implements IDriverService{
 
     @Override
     public DriverResponse create(DriverRequest request) {
+        Rol objRol = this.objRolRepository.findById(request.getId_rol()).orElseThrow();
         Driver driver = this.entityToDriverRequest(request, new Driver());
 
+        driver.setRol(objRol);
         return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
 
@@ -53,9 +58,13 @@ public class DriverService implements IDriverService{
     public DriverResponse update(String id, DriverRequest request) {
         Driver driver = this.find(id);
 
-        Driver driverUpdate = this.entityToDriverRequest(request, driver);
+        Rol objRol = this.objRolRepository.findById(request.getId_rol()).orElseThrow();
+       driver = this.entityToDriverRequest(request, driver);
 
-        return this.entityToDriverResponse(this.objDriverRepository.save(driverUpdate));
+       driver.setRol(objRol);
+
+
+        return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
 
 
