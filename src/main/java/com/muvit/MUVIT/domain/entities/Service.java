@@ -3,7 +3,6 @@ package com.muvit.MUVIT.domain.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.muvit.MUVIT.util.enums.RolEnum;
 import com.muvit.MUVIT.util.enums.ServicesEnum;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
