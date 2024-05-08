@@ -35,10 +35,8 @@ import lombok.AllArgsConstructor;
 public class UserController {
     @Autowired
     private final IUserService userService;
-    @Operation(
-        summary = "This EndPoint gets all registered users, it also has a paging function that only displays depending on the page and listing size.",
-        description = "you must send the page and corresponding size to list the users"
-    )
+
+    @Operation(summary = "This EndPoint gets all registered users, it also has a paging function that only displays depending on the page and listing size.", description = "you must send the page and corresponding size to list the users")
     @GetMapping
     public ResponseEntity<Page<UserResponse>> get(
             @RequestParam(defaultValue = "1") int page,
@@ -50,28 +48,27 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })
-    @Operation(
-        summary = "This EndPoint gets a user depending his ID.",
-        description = "Just have send an ID, and if that ID is same as user's ID, It is obtained and It will be displayed."
-        )
+    @Operation(summary = "This EndPoint gets a user depending his ID.", description = "Just have send an ID, and if that ID is same as user's ID, It is obtained and It will be displayed.")
     @GetMapping(path = "/{id}")
     public ResponseEntity<UserResponse> getById(
             @PathVariable String id) {
         return ResponseEntity.ok(this.userService.getById(id));
     }
-    @Operation(
-        summary = "This EndPoint insert a user depending his requirements and params.",
-        description = "Just have send all the params required fot the user and contact data."
-        )
+
+    @Operation(summary = "This EndPoint insert a user depending his requirements and params.", description = "Just have send all the params required fot the user and contact data.")
     @PostMapping
     public ResponseEntity<UserResponse> insert(
             @Validated @RequestBody UserRequest company) {
         return ResponseEntity.ok(this.userService.create(company));
     }
-    @Operation(
-        summary = "This EndPoint delete a user depending his ID",
-        description = "Just have send an ID, and if that ID is same as user's ID, It will be eliminated."
-        )
+
+    @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+    })
+    @Operation(summary = "This EndPoint delete a user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be eliminated.")
+    @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+    })
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.userService.delete(id);
@@ -79,6 +76,10 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+    })
+    @Operation(summary = "This EndPoint update a user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be update, but you have to send the news params.")
     @PutMapping(path = "/{id}")
     public ResponseEntity<UserResponse> update(
             @PathVariable String id, // id por url
