@@ -1,9 +1,12 @@
 package com.muvit.MUVIT.api.error_handler.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,21 +34,28 @@ public class BadRequestController {
         return ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST.name())
-                .message(exception.getMessage())
+                .error(exception.getMessage())
                 .build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public BaseErrorResponse handleErrors(MethodArgumentNotValidException exception) {
 
-        List<String> errors = new ArrayList<>();
+        List<Map<String, String>> errors = new ArrayList<>();
 
-        exception.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
+        exception.getAllErrors().forEach(e -> {
+            Map<String, String> error = new HashMap<>();
+
+            error.put("error", e.getDefaultMessage());
+            error.put("field", ((FieldError) e).getField()); ;
+
+            errors.add(error);
+        });
 
         return ErrorsResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST.name())
-                .errors(errors)
+                .message(errors)
                 .build();
     }
 }

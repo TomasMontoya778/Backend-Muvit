@@ -1,5 +1,7 @@
 package com.muvit.MUVIT.api.error_handler.response;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,5 +14,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class ErrorResponse extends BaseErrorResponse {
-    private String message;
+    private String error;
 }

@@ -31,8 +31,9 @@ public class Driver {
     private String name;
     @Column(nullable = false, length = 40)
     private String lastName;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private DNITypeEnum DNI_type;
+    private Dni_type_Enum DNI_type;
     @Column(nullable = false)
     private String DNI;
     @Column(nullable = false, length = 10)
