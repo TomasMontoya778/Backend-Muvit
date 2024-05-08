@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 public class TruckController {
     @Autowired
     private final ITruckService truckService;
-        @GetMapping
+    @GetMapping
     public ResponseEntity<Page<TruckResponse>> get(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size) {
@@ -43,23 +43,22 @@ public class TruckController {
 
     @PostMapping
     public ResponseEntity<TruckResponse> insert(
-            @Validated @RequestBody TruckRequest company) {
-        return ResponseEntity.ok(this.truckService.create(company));
+            @Validated @RequestBody TruckRequest truckRequest) {
+        return ResponseEntity.ok(this.truckService.create(truckRequest));
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.truckService.delete(id);
-
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<TruckResponse> update(
-            @PathVariable String id, // id por url
-            @Validated @RequestBody TruckRequest company // compañia actualizada
+            @PathVariable String id,
+            @Validated @RequestBody TruckRequest truckRequest
     ) {
-        return ResponseEntity.ok(this.truckService.update(id, company));
+        return ResponseEntity.ok(this.truckService.update(id, truckRequest));
     }
     
 }

@@ -6,6 +6,8 @@ import com.muvit.MUVIT.util.enums.BodyEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,7 @@ public class Truck {
   @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private BodyEnum body;
   @Column(length = 20, nullable = false)
   private String model;

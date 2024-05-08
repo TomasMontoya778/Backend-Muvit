@@ -2,7 +2,6 @@ package com.muvit.MUVIT.api.dto.response;
 
 import java.time.LocalDate;
 
-import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.util.enums.BodyEnum;
 
 import lombok.AllArgsConstructor;
@@ -20,5 +19,5 @@ public class TruckResponse {
     private String model;
     private LocalDate soat;
     private LocalDate tecnomecanica;
-    private Driver id_driver;
+    private DriverResponse id_driver;
 }

@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.api.dto.response;
 
-import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.util.enums.Dni_type_Enum;
 
 import lombok.AllArgsConstructor;
@@ -20,5 +19,5 @@ public class DriverResponse {
     private String DNI;
     private Long phoneNumber;
     private String email;
-    private Rol rol;
+    private RolResponse rol;
 }

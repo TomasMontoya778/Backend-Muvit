@@ -3,8 +3,9 @@ import com.muvit.MUVIT.util.enums.BodyEnum;
 
 import java.time.LocalDate;
 
-
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,12 +15,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TruckRequest {
-     @NotBlank(message = "Bodytruck is required")
      @NotBlank(message = "Model is required")
+     @Size(min = 0, max = 100)
      private String model;
-     @NotBlank(message = "SOAT expiry is required")
+     @NotNull(message = "SOAT expiry is required")
      private LocalDate soat;
-     @NotBlank(message = "tecnomecanica expiry is required")
+     @NotNull(message = "tecnomecanica expiry is required")
      private LocalDate tecnomecanica;
+     @NotNull(message = "The truck's Size is required")
      private BodyEnum body;
+     private String id_driver;
 }
