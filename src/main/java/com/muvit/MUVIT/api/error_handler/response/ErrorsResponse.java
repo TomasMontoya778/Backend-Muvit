@@ -1,6 +1,7 @@
 package com.muvit.MUVIT.api.error_handler.response;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class ErrorsResponse extends BaseErrorResponse {
-    private List<String> errors;
+    
+    private List<Map<String,String>> message;
 }
     
