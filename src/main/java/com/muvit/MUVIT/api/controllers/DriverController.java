@@ -18,6 +18,7 @@ import com.muvit.MUVIT.api.dto.request.DriverRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -43,7 +44,7 @@ public class DriverController {
 
     @PostMapping
     public ResponseEntity<DriverResponse> insert(
-            @Validated @RequestBody DriverRequest driver) {
+            @Valid @RequestBody DriverRequest driver) {
         return ResponseEntity.ok(this.driverService.create(driver));
     }
 

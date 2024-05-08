@@ -1,9 +1,9 @@
 package com.muvit.MUVIT.api.dto.response;
 
-import com.muvit.MUVIT.domain.entities.Rol;
+
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 
-import jakarta.persistence.Enumerated;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

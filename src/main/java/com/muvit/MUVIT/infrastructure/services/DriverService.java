@@ -87,8 +87,6 @@ public class DriverService implements IDriverService{
     }
 
     private Driver RequestToEntity(DriverRequest request, Driver objDriver){
-
-
         Rol rol = this.objRolRepository.findById(request.getRol())
                 .orElseThrow(() -> new IdNotFoundException("Rol"));
 
