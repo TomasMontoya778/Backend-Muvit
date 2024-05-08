@@ -26,7 +26,7 @@ public class DriverRequest {
     @NotBlank(message = "Driver's DNI is required")
     private String DNI;
     @NotBlank(message = "Driver's telephone number is required")
-    private Long phoneNumber;
+    private String phoneNumber;
     @NotBlank(message = "Driver's email is required")
     private String email;
     private Rol id_rol;
