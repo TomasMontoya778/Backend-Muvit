@@ -43,8 +43,8 @@ public class DriverController {
 
     @PostMapping
     public ResponseEntity<DriverResponse> insert(
-            @Validated @RequestBody DriverRequest company) {
-        return ResponseEntity.ok(this.driverService.create(company));
+            @Validated @RequestBody DriverRequest driver) {
+        return ResponseEntity.ok(this.driverService.create(driver));
     }
 
     @DeleteMapping(path = "/{id}")

@@ -1,9 +1,11 @@
 package com.muvit.MUVIT.domain.entities;
 import jakarta.persistence.CascadeType;
 import java.util.List;
-import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,14 +31,15 @@ public class Driver {
     private String name;
     @Column(nullable = false, length = 40)
     private String lastName;
-    @Column(nullable = false)
-    private Dni_type_Enum DNI_type;
+    @Enumerated(EnumType.STRING)
+    private DNITypeEnum DNI_type;
     @Column(nullable = false)
     private String DNI;
     @Column(nullable = false, length = 10)
     private String phoneNumber;
     @Column(nullable = false)
     private String email;
+
 
     /* Foreign Key*/
     @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)

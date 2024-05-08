@@ -1,7 +1,6 @@
 package com.muvit.MUVIT.api.dto.request;
 
-import com.muvit.MUVIT.domain.entities.Rol;
-import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,6 +28,6 @@ public class DriverRequest {
     private String phoneNumber;
     @NotBlank(message = "Driver's email is required")
     private String email;
-    private Long id_rol;
+    private Long rol;
 
 }

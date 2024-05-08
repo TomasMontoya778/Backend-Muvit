@@ -1,8 +1,9 @@
 package com.muvit.MUVIT.api.dto.response;
 
 import com.muvit.MUVIT.domain.entities.Rol;
-import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+import com.muvit.MUVIT.util.enums.DNITypeEnum;
 
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +17,9 @@ public class DriverResponse {
     private String id_driver;
     private String name;
     private String lastName;
-    private Dni_type_Enum DNI_type;
+    private DNITypeEnum DNI_type;
     private String DNI;
     private String phoneNumber;
     private String email;
-    private Rol rol;
+    private RolResponse rol;
 }
