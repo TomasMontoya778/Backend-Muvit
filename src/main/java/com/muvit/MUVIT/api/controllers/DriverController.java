@@ -19,6 +19,7 @@ import com.muvit.MUVIT.api.dto.request.DriverRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -45,8 +46,8 @@ public class DriverController {
 
     @PostMapping
     public ResponseEntity<DriverResponse> insert(
-            @Validated @RequestBody DriverRequest company) {
-        return ResponseEntity.ok(this.driverService.create(company));
+            @Valid @RequestBody DriverRequest driver) {
+        return ResponseEntity.ok(this.driverService.create(driver));
     }
 
     @DeleteMapping(path = "/{id}")

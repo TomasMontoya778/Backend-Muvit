@@ -1,7 +1,7 @@
 package com.muvit.MUVIT.domain.entities;
 import jakarta.persistence.CascadeType;
 import java.util.List;
-import com.muvit.MUVIT.util.enums.Dni_type_Enum;
+import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,9 +37,10 @@ public class Driver {
     @Column(nullable = false)
     private String DNI;
     @Column(nullable = false, length = 10)
-    private Long phoneNumber;
+    private String phoneNumber;
     @Column(nullable = false)
     private String email;
+
 
     /* Foreign Key*/
     @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)

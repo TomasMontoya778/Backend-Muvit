@@ -7,9 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.DriverRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
+import com.muvit.MUVIT.api.dto.response.RolResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
+import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
+import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
+import com.muvit.MUVIT.util.enums.DNITypeEnum;
+import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -18,6 +23,8 @@ import lombok.AllArgsConstructor;
 public class DriverService implements IDriverService{
 
     private final DriverRepository objDriverRepository;
+    private final RolRepository objRolRepository;
+
 
     @Override
     public DriverResponse getById(String id) {
@@ -27,7 +34,8 @@ public class DriverService implements IDriverService{
 
     @Override
     public DriverResponse create(DriverRequest request) {
-        Driver driver = this.entityToDriverRequest(request, new Driver());
+       
+        Driver driver = this.RequestToEntity(request, new Driver());
 
         return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
@@ -53,9 +61,13 @@ public class DriverService implements IDriverService{
     public DriverResponse update(String id, DriverRequest request) {
         Driver driver = this.find(id);
 
-        Driver driverUpdate = this.entityToDriverRequest(request, driver);
+        Rol objRol = this.objRolRepository.findById(request.getRol()).orElseThrow();
+       driver = this.RequestToEntity(request, driver);
 
-        return this.entityToDriverResponse(this.objDriverRepository.save(driverUpdate));
+       driver.setRol(objRol);
+
+
+        return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
 
 
@@ -66,15 +78,25 @@ public class DriverService implements IDriverService{
 
     private DriverResponse entityToDriverResponse(Driver objDriver){
         DriverResponse response = new DriverResponse();
+        RolResponse rol = new RolResponse();
 
+        BeanUtils.copyProperties(objDriver.getRol(), rol);
         BeanUtils.copyProperties(objDriver, response);
-
+        response.setRol(rol);
         return response;
     }
 
-    private Driver entityToDriverRequest(DriverRequest request, Driver objDriver){
+    private Driver RequestToEntity(DriverRequest request, Driver objDriver){
+        Rol rol = this.objRolRepository.findById(request.getRol())
+                .orElseThrow(() -> new IdNotFoundException("Rol"));
 
-        BeanUtils.copyProperties(request, objDriver);
+        objDriver.setName(request.getName());
+        objDriver.setLastName(request.getLastName());
+        objDriver.setEmail(request.getEmail());
+        objDriver.setDNI_type(DNITypeEnum.valueOf(request.getDNI_type()));
+        objDriver.setDNI(request.getDNI());
+        objDriver.setPhoneNumber(request.getPhoneNumber());
+        objDriver.setRol(rol);
 
         return objDriver;
     }
