@@ -1,14 +1,23 @@
 package com.muvit.MUVIT.domain.entities;
-
-
+import jakarta.persistence.CascadeType;
+import java.util.List;
+import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "driver")
 @Data
@@ -23,13 +32,28 @@ public class Driver {
     @Column(nullable = false, length = 40)
     private String lastName;
     @Column(nullable = false)
-    private String DNI_type;
+    @Enumerated(EnumType.STRING)
+    private DNITypeEnum DNI_type;
     @Column(nullable = false)
-    private Long DNI;
+    private String DNI;
     @Column(nullable = false, length = 10)
-    private Long phoneNumber;
+    private String phoneNumber;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
-    private Rol id_rol;
+
+
+    /* Foreign Key*/
+    @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Service> driverService;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_rol")
+    private Rol rol;
+
+    @OneToMany(mappedBy = "id_driver_truck", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Truck> truck;
 }
