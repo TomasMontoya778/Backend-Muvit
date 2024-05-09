@@ -15,7 +15,7 @@ import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
-import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
+
 
 import lombok.AllArgsConstructor;
 
@@ -89,7 +89,7 @@ public class DriverService implements IDriverService{
 
     private Driver RequestToEntity(DriverRequest request, Driver objDriver){
         Rol rol = this.objRolRepository.findById(request.getRol())
-                .orElseThrow(() -> new IdNotFoundException("Rol"));
+                .orElseThrow(() -> new BadRequestException("No hay contenido con el ID suministrado"));
 
         objDriver.setName(request.getName());
         objDriver.setLastName(request.getLastName());

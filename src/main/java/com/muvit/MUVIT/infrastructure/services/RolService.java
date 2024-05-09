@@ -11,7 +11,7 @@ import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IRolService;
 import com.muvit.MUVIT.util.enums.RolEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
-import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
+
 
 import lombok.AllArgsConstructor;
 
