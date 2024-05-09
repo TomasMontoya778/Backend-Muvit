@@ -14,6 +14,7 @@ import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -73,7 +74,7 @@ public class DriverService implements IDriverService{
 
     private Driver find(String id){
 
-        return this.objDriverRepository.findById(id).orElseThrow(()-> new IdNotFoundException("driver"));
+        return this.objDriverRepository.findById(id).orElseThrow(()-> new BadRequestException("No hay registros con el ID suministrado"));
     }
 
     private DriverResponse entityToDriverResponse(Driver objDriver){

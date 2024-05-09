@@ -14,6 +14,7 @@ import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.TruckRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.ITruckService;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class TruckService implements ITruckService{
         return this.entityToResponse(this.find(id));
     }
     private Truck find(String id){
-        return this.objTruckRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Truck"));
+        return this.objTruckRepository.findById(id).orElseThrow(()-> new BadRequestException("No hay registros con el id suministrado"));
     }
     @Override
     public TruckResponse create(TruckRequest request) {
@@ -61,7 +62,9 @@ public class TruckService implements ITruckService{
 
     @Override
     public void delete(String id) {
-        this.objTruckRepository.deleteById(id);
+        Truck truck = this.find(id);
+
+        this.objTruckRepository.delete(truck);
     }
 
     @Override
