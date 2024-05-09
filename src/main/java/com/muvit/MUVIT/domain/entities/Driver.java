@@ -33,7 +33,7 @@ public class Driver {
     private String lastName;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Dni_type_Enum DNI_type;
+    private DNITypeEnum DNI_type;
     @Column(nullable = false)
     private String DNI;
     @Column(nullable = false, length = 10)
