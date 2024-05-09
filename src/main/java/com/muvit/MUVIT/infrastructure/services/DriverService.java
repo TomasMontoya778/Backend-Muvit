@@ -73,7 +73,7 @@ public class DriverService implements IDriverService{
 
     private Driver find(String id){
 
-        return this.objDriverRepository.findById(id).orElseThrow();
+        return this.objDriverRepository.findById(id).orElseThrow(()-> new IdNotFoundException("driver"));
     }
 
     private DriverResponse entityToDriverResponse(Driver objDriver){
