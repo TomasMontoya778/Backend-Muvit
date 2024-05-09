@@ -10,7 +10,8 @@ import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IRolService;
 import com.muvit.MUVIT.util.enums.RolEnum;
-import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
+
 
 import lombok.AllArgsConstructor;
 
@@ -46,7 +47,7 @@ public class RolService implements IRolService {
     }
 
     private Rol find(Long id){
-        return this.rolRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Rol"));
+        return this.rolRepository.findById(id).orElseThrow(()-> new BadRequestException("No hay registros con el ID sumnistrado"));
     } 
     @Override
     public RolResponse getById(Long id) {

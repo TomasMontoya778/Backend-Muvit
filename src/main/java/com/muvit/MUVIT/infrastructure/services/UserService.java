@@ -16,7 +16,7 @@ import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IUserService;
-import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
 
@@ -34,7 +34,7 @@ public class UserService implements IUserService {
     }
 
     private User find(String id) {
-        return this.objUserRepository.findById(id).orElseThrow(() -> new IdNotFoundException("User"));
+        return this.objUserRepository.findById(id).orElseThrow(() -> new BadRequestException("No hay registros con el ID suministrado"));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class UserService implements IUserService {
 
     private User requestToEntity(UserRequest userRequest, User user) {
         Rol rol = this.objRolRepository.findById(userRequest.getRol())
-                .orElseThrow(() -> new IdNotFoundException("Rol"));
+                .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));
         user.setName(userRequest.getName());
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());
@@ -76,7 +76,9 @@ public class UserService implements IUserService {
 
     @Override
     public void delete(String id) {
-        this.objUserRepository.deleteById(id);
+        User user = this.find(id);
+
+        this.objUserRepository.delete(user);
     }
 
     @Override
