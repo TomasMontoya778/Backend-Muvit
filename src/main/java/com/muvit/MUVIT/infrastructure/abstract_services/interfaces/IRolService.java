@@ -5,4 +5,7 @@ import com.muvit.MUVIT.api.dto.response.RolResponse;
 
 public interface IRolService extends CrudService<RolRequest, RolResponse, Long> {
         public RolResponse getById(Long id);
+
+        // @Query(value = "SELECT ")
+        // public RolResponse fieldByRol =
 }

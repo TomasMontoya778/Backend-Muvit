@@ -30,13 +30,16 @@ public class RolService implements IRolService {
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
+        Rol rol = this.find(id);
+
+        this.rolRepository.delete(rol);
 
     }
 
     @Override
     public Page<RolResponse> getAll(int page, int size) {
-        // TODO Auto-generated method stub
+        if(page < 0) page = 0;
+        
         return null;
     }
 
