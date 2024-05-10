@@ -46,7 +46,7 @@ public class Driver {
     @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Service> driverService;
+    private List<ServiceEntity> driverService;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_rol")

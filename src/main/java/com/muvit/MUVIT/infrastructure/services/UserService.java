@@ -52,14 +52,14 @@ public class UserService implements IUserService {
         return userResponse;
     }
 
-    public Rol responseRolToEntity(RolResponse rolResponse) {
-        Rol rol = new Rol();
-        rol.setId_rol(rolResponse.getId_rol());
-        rol.setNameUser(rolResponse.getNameUser());
-        rol.setPassword(rolResponse.getPassword());
-        rol.setRol_enum(rolResponse.getRol());
-        return rol;
-    }
+    // public Rol responseRolToEntity(RolResponse rolResponse) {
+    //     Rol rol = new Rol();
+    //     rol.setId_rol(rolResponse.getId_rol());
+    //     rol.setNameUser(rolResponse.getNameUser());
+    //     rol.setPassword(rolResponse.getPassword());
+    //     rol.setRol_enum(rolResponse.getRol());
+    //     return rol;
+    // }
 
     private User requestToEntity(UserRequest userRequest, User user) {
         Rol rol = this.objRolRepository.findById(userRequest.getRol())

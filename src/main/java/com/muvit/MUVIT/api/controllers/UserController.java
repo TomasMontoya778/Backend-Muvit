@@ -58,8 +58,8 @@ public class UserController {
     @Operation(summary = "This EndPoint insert an user depending his requirements and params.", description = "Just have send all the params required fot the user and contact data.")
     @PostMapping
     public ResponseEntity<UserResponse> insert(
-            @Validated @RequestBody UserRequest company) {
-        return ResponseEntity.ok(this.userService.create(company));
+            @Validated @RequestBody UserRequest userRequest) {
+        return ResponseEntity.ok(this.userService.create(userRequest));
     }
 
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
@@ -72,7 +72,6 @@ public class UserController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.userService.delete(id);
-
         return ResponseEntity.noContent().build();
     }
 
@@ -83,9 +82,9 @@ public class UserController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<UserResponse> update(
             @PathVariable String id, // id por url
-            @Validated @RequestBody UserRequest company // compañia actualizada
+            @Validated @RequestBody UserRequest userRequest // compañia actualizada
     ) {
-        return ResponseEntity.ok(this.userService.update(id, company));
+        return ResponseEntity.ok(this.userService.update(id, userRequest));
     }
 
 }
