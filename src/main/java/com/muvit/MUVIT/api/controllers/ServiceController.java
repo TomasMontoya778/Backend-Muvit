@@ -44,8 +44,8 @@ public class ServiceController {
 
     @PostMapping
     public ResponseEntity<ServiceResponse> insert(
-            @Validated @RequestBody ServiceRequest company) {
-        return ResponseEntity.ok(this.serviceService.create(company));
+            @Validated @RequestBody ServiceRequest serviceRequest) {
+        return ResponseEntity.ok(this.serviceService.create(serviceRequest));
     }
 
     @DeleteMapping(path = "/{id}")
@@ -57,9 +57,9 @@ public class ServiceController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<ServiceResponse> update(
-            @PathVariable String id, // id por url
-            @Validated @RequestBody ServiceRequest company // compañia actualizada
+            @PathVariable String id,
+            @Validated @RequestBody ServiceRequest serviceRequest 
     ) {
-        return ResponseEntity.ok(this.serviceService.update(id, company));
+        return ResponseEntity.ok(this.serviceService.update(id, serviceRequest));
     }
 }
