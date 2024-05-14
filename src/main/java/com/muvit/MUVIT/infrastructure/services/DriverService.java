@@ -34,8 +34,6 @@ public class DriverService implements IDriverService{
     private final DriverRepository objDriverRepository;
     @Autowired
     private final RolRepository objRolRepository;
-    @Autowired
-    private final TruckRepository objTruckRepository;
 
     @Override
     public DriverResponse getById(String id) {
@@ -91,7 +89,7 @@ public class DriverService implements IDriverService{
         RolResponse rol = new RolResponse();
         List<TruckDriverResponse> truckList = new ArrayList<>();
         for(Truck truck : objDriver.getTruck()){
-            TruckDriverResponse truckResponse = new TruckDriverResponse();
+            TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
             BeanUtils.copyProperties(truck, truckResponse);
             truckList.add(truckResponse);
         }
@@ -101,13 +99,13 @@ public class DriverService implements IDriverService{
         response.setRol(rol);
         return response;
     }
-    private TruckDriverResponse entityToTruckDriverResponse(Truck listTruck){
+    private TruckDriverResponse entityToTruckDriverResponse(Truck truck){
         TruckDriverResponse listTruckDriverResponse = new TruckDriverResponse();
-        listTruck.setId(listTruckDriverResponse.getId());
-        listTruck.setModel(listTruckDriverResponse.getModel());
-        listTruck.setBody(listTruckDriverResponse.getBody());
-        listTruck.setSoat(listTruckDriverResponse.getSoat());
-        listTruck.setTecnomecanica(listTruckDriverResponse.getTecnomecanica());
+        listTruckDriverResponse.setId(truck.getId());
+        listTruckDriverResponse.setModel(truck.getModel());
+        listTruckDriverResponse.setBody(truck.getBody());
+        listTruckDriverResponse.setSoat(truck.getSoat());
+        listTruckDriverResponse.setTecnomecanica(truck.getTecnomecanica());
         return listTruckDriverResponse;
     }
     private Driver RequestToEntity(DriverRequest request, Driver objDriver){
