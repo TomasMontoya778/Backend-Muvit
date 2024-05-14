@@ -1,6 +1,11 @@
 package com.muvit.MUVIT.infrastructure.services;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -8,10 +13,13 @@ import org.springframework.stereotype.Service;
 import com.muvit.MUVIT.api.dto.request.DriverRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.api.dto.response.RolResponse;
+import com.muvit.MUVIT.api.dto.response.TruckDriverResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.domain.entities.Rol;
+import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
+import com.muvit.MUVIT.domain.repositories.TruckRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
@@ -22,14 +30,13 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class DriverService implements IDriverService{
-
+    @Autowired
     private final DriverRepository objDriverRepository;
+    @Autowired
     private final RolRepository objRolRepository;
-
 
     @Override
     public DriverResponse getById(String id) {
-        
         return this.entityToDriverResponse(this.find(id));
     }
 
@@ -80,17 +87,30 @@ public class DriverService implements IDriverService{
     private DriverResponse entityToDriverResponse(Driver objDriver){
         DriverResponse response = new DriverResponse();
         RolResponse rol = new RolResponse();
-
+        List<TruckDriverResponse> truckList = new ArrayList<>();
+        for(Truck truck : objDriver.getTruck()){
+            TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
+            BeanUtils.copyProperties(truck, truckResponse);
+            truckList.add(truckResponse);
+        }
         BeanUtils.copyProperties(objDriver.getRol(), rol);
         BeanUtils.copyProperties(objDriver, response);
+        response.setTruck(truckList);
         response.setRol(rol);
         return response;
     }
-
+    private TruckDriverResponse entityToTruckDriverResponse(Truck truck){
+        TruckDriverResponse listTruckDriverResponse = new TruckDriverResponse();
+        listTruckDriverResponse.setId(truck.getId());
+        listTruckDriverResponse.setModel(truck.getModel());
+        listTruckDriverResponse.setBody(truck.getBody());
+        listTruckDriverResponse.setSoat(truck.getSoat());
+        listTruckDriverResponse.setTecnomecanica(truck.getTecnomecanica());
+        return listTruckDriverResponse;
+    }
     private Driver RequestToEntity(DriverRequest request, Driver objDriver){
         Rol rol = this.objRolRepository.findById(request.getRol())
                 .orElseThrow(() -> new BadRequestException("No hay contenido con el ID suministrado"));
-
         objDriver.setName(request.getName());
         objDriver.setLastName(request.getLastName());
         objDriver.setEmail(request.getEmail());
@@ -98,7 +118,6 @@ public class DriverService implements IDriverService{
         objDriver.setDNI(request.getDNI());
         objDriver.setPhoneNumber(request.getPhoneNumber());
         objDriver.setRol(rol);
-
         return objDriver;
     }
 }

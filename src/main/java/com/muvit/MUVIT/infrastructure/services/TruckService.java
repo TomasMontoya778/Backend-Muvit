@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.TruckRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
+import com.muvit.MUVIT.api.dto.response.DriverToTruckResponse;
 import com.muvit.MUVIT.api.dto.response.TruckResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.domain.entities.Truck;
@@ -42,7 +43,7 @@ public class TruckService implements ITruckService{
 
     private TruckResponse entityToResponse(Truck truck){
         TruckResponse truckResponse = new TruckResponse();
-        DriverResponse driverResponse = new DriverResponse();
+        DriverToTruckResponse driverResponse = new DriverToTruckResponse();
         BeanUtils.copyProperties(truck, truckResponse);
         BeanUtils.copyProperties(truck.getId_driver_truck(), driverResponse);
         truckResponse.setId_driver(driverResponse);
