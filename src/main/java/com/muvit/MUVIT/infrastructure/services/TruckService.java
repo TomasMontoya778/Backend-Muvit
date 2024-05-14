@@ -60,10 +60,10 @@ public class TruckService implements ITruckService {
         // LocalDate soatDate = truckRequest.getSoat();
         // LocalDate technomechanicsDate = truckRequest.getTecnomecanica();
         if (truckRequest.getSoat().plusYears(1).isBefore(LocalDate.now())
-                && truckRequest.getTecnomecanica().isAfter(LocalDate.now())) {
+                && truckRequest.getTecnomecanica().plusYears(1).isBefore(LocalDate.now())) {
             BadRequestException error = new BadRequestException("Your Soat and Technomechanics are out of date.");
             throw error;
-        } else if (truckRequest.getTecnomecanica().plusYears(1).isAfter(LocalDate.now())
+        } else if (truckRequest.getTecnomecanica().plusYears(1).isBefore(LocalDate.now())
                 || truckRequest.getSoat().isBefore(LocalDate.now())) {
             BadRequestException error = new BadRequestException("Your Soat or Technomechanics are out of date.");
             throw error;
