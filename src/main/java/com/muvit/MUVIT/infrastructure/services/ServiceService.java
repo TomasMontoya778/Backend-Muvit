@@ -19,7 +19,7 @@ import com.muvit.MUVIT.domain.repositories.ServiceRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
-import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
 
@@ -38,7 +38,7 @@ public class ServiceService implements IServiceService{
         return this.entityToResponse(this.find(id));
     }
     private ServiceEntity find (String id){
-        return this.objServiceRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Service"));
+        return this.objServiceRepository.findById(id).orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
     }
 
     @Override
@@ -68,9 +68,9 @@ public class ServiceService implements IServiceService{
     }
     private ServiceEntity requestToEntity (ServiceRequest serviceRequest, ServiceEntity objService){
         User user = this.objUserRepository.findById(serviceRequest.getUser())
-        .orElseThrow(() -> new IdNotFoundException("User"));
+        .orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
         Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
-        .orElseThrow(()-> new IdNotFoundException("Driver"));
+        .orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
         objService.setTypeService(serviceRequest.getTypeService());
         objService.setDistance(serviceRequest.getDistance());
         objService.setAssistant(serviceRequest.getAssistant());
