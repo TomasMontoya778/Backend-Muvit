@@ -28,6 +28,6 @@ public class Rol {
     @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
-    private RolEnum rol_enum;
+    private RolEnum rolEnum;
     private String userPhoto;
 }

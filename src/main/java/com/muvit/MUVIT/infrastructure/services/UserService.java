@@ -16,6 +16,7 @@ import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IUserService;
+
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
@@ -40,6 +41,7 @@ public class UserService implements IUserService {
     @Override
     public UserResponse create(UserRequest request) {
         User objUser = this.requestToEntity(request, new User());
+        
         return this.entityToResponse(this.objUserRepository.save(objUser));
     }
 
@@ -51,19 +53,11 @@ public class UserService implements IUserService {
         userResponse.setRol(rol);
         return userResponse;
     }
-
-    // public Rol responseRolToEntity(RolResponse rolResponse) {
-    //     Rol rol = new Rol();
-    //     rol.setId_rol(rolResponse.getId_rol());
-    //     rol.setNameUser(rolResponse.getNameUser());
-    //     rol.setPassword(rolResponse.getPassword());
-    //     rol.setRol_enum(rolResponse.getRol());
-    //     return rol;
-    // }
-
     private User requestToEntity(UserRequest userRequest, User user) {
         Rol rol = this.objRolRepository.findById(userRequest.getRol())
                 .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));
+
+        
         user.setName(userRequest.getName());
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());

@@ -1,5 +1,8 @@
 package com.muvit.MUVIT.api.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -50,18 +53,18 @@ public class RolController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        // this.rolService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        this.rolService.delete(id);
 
-        return null;
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<RolResponse> update(
-            @PathVariable String id, // id por url
+            @PathVariable Long id, // id por url
             @Validated @RequestBody RolRequest company // compañia actualizada
     ) {
-        // return ResponseEntity.ok(this.rolService.update(id, company));
-        return null;
+        return ResponseEntity.ok(this.rolService.update(id, company));
+        
     }
 }
