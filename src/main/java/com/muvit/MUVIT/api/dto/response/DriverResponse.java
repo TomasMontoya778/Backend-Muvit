@@ -1,6 +1,8 @@
 package com.muvit.MUVIT.api.dto.response;
 
 
+import java.util.List;
+
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 
 
@@ -22,4 +24,5 @@ public class DriverResponse {
     private String phoneNumber;
     private String email;
     private RolResponse rol;
+    private List<TruckDriverResponse> truck;
 }
