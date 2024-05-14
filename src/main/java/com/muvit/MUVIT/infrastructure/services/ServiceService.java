@@ -44,6 +44,10 @@ public class ServiceService implements IServiceService{
     @Override
     public ServiceResponse create(ServiceRequest request) {
         ServiceEntity objService = this.requestToEntity(request, new ServiceEntity());
+        if (objService.getAssistant() > 6) {
+            BadRequestException error = new BadRequestException("Our assistant limits is SIX.");
+            throw error;
+        }
         return this.entityToResponse(this.objServiceRepository.save(objService));
     }
     private ServiceResponse entityToResponse(ServiceEntity serviceEntity){
@@ -68,9 +72,9 @@ public class ServiceService implements IServiceService{
     }
     private ServiceEntity requestToEntity (ServiceRequest serviceRequest, ServiceEntity objService){
         User user = this.objUserRepository.findById(serviceRequest.getUser())
-        .orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
+        .orElseThrow(() -> new BadRequestException("It doesn't found any id."));
         Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
-        .orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
+        .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
         objService.setTypeService(serviceRequest.getTypeService());
         objService.setDistance(serviceRequest.getDistance());
         objService.setAssistant(serviceRequest.getAssistant());
