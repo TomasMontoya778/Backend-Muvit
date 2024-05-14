@@ -15,5 +15,5 @@ public class RolResponse {
     private long id_rol;
     private String nameUser;
     private String password;
-    private RolEnum rol;
+    private RolEnum rolEnum;
 }
