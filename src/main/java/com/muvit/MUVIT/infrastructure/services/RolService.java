@@ -13,7 +13,6 @@ import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IRolService;
 import com.muvit.MUVIT.util.enums.RolEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
-
 import lombok.AllArgsConstructor;
 
 @Service
@@ -49,9 +48,11 @@ public class RolService implements IRolService {
         return this.entityToResponse(this.rolRepository.save(rolUpdate));
     }
 
-    private Rol find(Long id){
-        return this.rolRepository.findById(id).orElseThrow(()-> new BadRequestException("No hay registros con el ID sumnistrado"));
-    } 
+    private Rol find(Long id) {
+        return this.rolRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("No hay registros con el ID sumnistrado"));
+    }
+
     @Override
     public RolResponse getById(Long id) {
         return this.entityToResponse(this.find(id));
@@ -60,8 +61,10 @@ public class RolService implements IRolService {
     private Rol requestToEntity(RolRequest request, Rol rol) {
         rol.setNameUser(request.getNameUser());
         rol.setPassword(request.getPassword());
+
         String enume = request.getRolEnum();
         rol.setRolEnum(RolEnum.valueOf(enume));
+        rol.setUserPhoto(request.getUserPhoto());
         return rol;
     }
 
@@ -71,6 +74,7 @@ public class RolService implements IRolService {
         response.setNameUser(entity.getNameUser());
         response.setPassword(entity.getPassword());
         response.setRolEnum(entity.getRolEnum());
+        response.setUserPhoto(entity.getUserPhoto());
         return response;
     }
 

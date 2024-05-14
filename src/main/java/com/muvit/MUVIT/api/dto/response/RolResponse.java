@@ -16,4 +16,5 @@ public class RolResponse {
     private String nameUser;
     private String password;
     private RolEnum rolEnum;
+    private String userPhoto;
 }

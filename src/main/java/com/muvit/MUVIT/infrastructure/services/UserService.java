@@ -53,7 +53,6 @@ public class UserService implements IUserService {
         userResponse.setRol(rol);
         return userResponse;
     }
-
     private User requestToEntity(UserRequest userRequest, User user) {
         Rol rol = this.objRolRepository.findById(userRequest.getRol())
                 .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));

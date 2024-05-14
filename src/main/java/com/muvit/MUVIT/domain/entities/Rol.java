@@ -29,4 +29,5 @@ public class Rol {
     private String password;
     @Enumerated(EnumType.STRING)
     private RolEnum rolEnum;
+    private String userPhoto;
 }

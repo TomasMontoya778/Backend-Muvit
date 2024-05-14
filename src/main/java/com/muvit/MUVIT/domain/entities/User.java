@@ -39,7 +39,7 @@ public class User {
     @OneToMany(mappedBy = "id_user", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Service> userService;
+    private List<ServiceEntity> userService;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user_rol", referencedColumnName = "id_rol")
