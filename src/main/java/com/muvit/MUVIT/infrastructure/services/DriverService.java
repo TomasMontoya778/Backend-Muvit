@@ -89,11 +89,15 @@ public class DriverService implements IDriverService{
     private DriverResponse entityToDriverResponse(Driver objDriver){
         DriverResponse response = new DriverResponse();
         RolResponse rol = new RolResponse();
-        List<TruckDriverResponse> truck = new ArrayList<>();
-        BeanUtils.copyProperties(objDriver.getTruck(), truck);
+        List<TruckDriverResponse> truckList = new ArrayList<>();
+        for(Truck truck : objDriver.getTruck()){
+            TruckDriverResponse truckResponse = new TruckDriverResponse();
+            BeanUtils.copyProperties(truck, truckResponse);
+            truck.add(truckResponse);
+        }
         BeanUtils.copyProperties(objDriver.getRol(), rol);
         BeanUtils.copyProperties(objDriver, response);
-        response.setTruck(truck);
+        response.setTruck(listTruck);
         response.setRol(rol);
         return response;
     }
