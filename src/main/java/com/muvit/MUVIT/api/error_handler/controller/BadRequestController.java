@@ -54,8 +54,7 @@ public class BadRequestController {
 
         Map<String, String> error = new HashMap<>();
 
-        error.put("id", exception.getMessage());
-
+        error.put("Error", exception.getMessage());
         errors.add(error);
         return ErrorsResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
