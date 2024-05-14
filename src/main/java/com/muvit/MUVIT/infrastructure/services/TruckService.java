@@ -64,7 +64,7 @@ public class TruckService implements ITruckService {
             BadRequestException error = new BadRequestException("Your Soat and Technomechanics are out of date.");
             throw error;
         } else if (truckRequest.getTecnomecanica().plusYears(1).isBefore(LocalDate.now())
-                || truckRequest.getSoat().isBefore(LocalDate.now())) {
+                || truckRequest.getSoat().plusYears(1).isBefore(LocalDate.now())) {
             BadRequestException error = new BadRequestException("Your Soat or Technomechanics are out of date.");
             throw error;
         } else {
