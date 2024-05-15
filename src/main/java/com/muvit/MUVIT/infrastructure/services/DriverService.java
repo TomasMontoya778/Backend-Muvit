@@ -19,7 +19,6 @@ import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
-import com.muvit.MUVIT.domain.repositories.TruckRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IDriverService;
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
