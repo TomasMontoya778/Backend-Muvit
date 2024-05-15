@@ -43,7 +43,9 @@ public class DriverService implements IDriverService{
     public DriverResponse create(DriverRequest request) {
        
         Driver driver = this.RequestToEntity(request, new Driver());
-
+        if (driver.getTruck() == null) {
+            driver.setTruck(new ArrayList<>());
+        }
         return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
 
@@ -72,8 +74,6 @@ public class DriverService implements IDriverService{
        driver = this.RequestToEntity(request, driver);
 
        driver.setRol(objRol);
-
-
         return this.entityToDriverResponse(this.objDriverRepository.save(driver));
     }
 
@@ -87,10 +87,12 @@ public class DriverService implements IDriverService{
         DriverResponse response = new DriverResponse();
         RolResponse rol = new RolResponse();
         List<TruckDriverResponse> truckList = new ArrayList<>();
-        for(Truck truck : objDriver.getTruck()){
-            TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
-            BeanUtils.copyProperties(truck, truckResponse);
-            truckList.add(truckResponse);
+        if (objDriver.getTruck() != null) {
+            for(Truck truck : objDriver.getTruck()){
+                TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
+                BeanUtils.copyProperties(truck, truckResponse);
+                truckList.add(truckResponse);
+            }
         }
         BeanUtils.copyProperties(objDriver.getRol(), rol);
         BeanUtils.copyProperties(objDriver, response);
@@ -117,6 +119,9 @@ public class DriverService implements IDriverService{
         objDriver.setDNI(request.getDNI());
         objDriver.setPhoneNumber(request.getPhoneNumber());
         objDriver.setRol(rol);
+        if (objDriver.getTruck() == null){
+            objDriver.setTruck(new ArrayList<>());
+        }
         return objDriver;
     }
 }
