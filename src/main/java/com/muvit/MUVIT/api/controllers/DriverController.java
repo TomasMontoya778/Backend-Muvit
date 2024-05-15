@@ -33,7 +33,7 @@ public class DriverController {
     @GetMapping
     public ResponseEntity<Page<DriverResponse>> get(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "2") int size) {
+            @RequestParam(defaultValue = "10") int size) {
 
         return ResponseEntity.ok(this.driverService.getAll(page - 1, size));
     }

@@ -81,5 +81,4 @@ public class TruckService implements ITruckService{
         Truck truckToUpdate = this.requestToEntity(request, truck);
         return this.entityToResponse(this.objTruckRepository.save(truckToUpdate));
     }
-
 }
