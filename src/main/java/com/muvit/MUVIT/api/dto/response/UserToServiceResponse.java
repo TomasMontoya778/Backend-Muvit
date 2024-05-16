@@ -15,5 +15,5 @@ public class UserToServiceResponse {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private RolResponse rol;
+    private BasicRolResponse rol;
 }

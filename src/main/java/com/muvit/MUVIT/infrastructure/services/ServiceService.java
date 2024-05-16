@@ -12,10 +12,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.ServiceRequest;
+import com.muvit.MUVIT.api.dto.response.BasicRolResponse;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
+import com.muvit.MUVIT.api.dto.response.RolResponse;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 import com.muvit.MUVIT.api.dto.response.UserToServiceResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
+import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.entities.ServiceEntity;
 import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
@@ -71,11 +74,19 @@ public class ServiceService implements IServiceService {
         serviceResponse.setStatusService(serviceEntity.getStatusService());
         UserToServiceResponse userResponse = new UserToServiceResponse();
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
+        BasicRolResponse rolBasic = this.rolToBasicRolResponse(serviceEntity.getId_user().getRol());
         DriverResponse driverResponse = new DriverResponse();
         BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
+        userResponse.setRol(rolBasic);
         serviceResponse.setUser(userResponse);
         serviceResponse.setDriver(driverResponse);
         return serviceResponse;
+    }
+
+    private BasicRolResponse rolToBasicRolResponse(Rol rol) {
+        BasicRolResponse basicResponse = new BasicRolResponse();
+        BeanUtils.copyProperties(rol, basicResponse);
+        return basicResponse;
     }
 
     private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
