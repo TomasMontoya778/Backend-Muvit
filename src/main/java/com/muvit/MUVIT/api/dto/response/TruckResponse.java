@@ -3,6 +3,7 @@ package com.muvit.MUVIT.api.dto.response;
 import java.time.LocalDate;
 
 import com.muvit.MUVIT.util.enums.BodyEnum;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +20,6 @@ public class TruckResponse {
     private String model;
     private LocalDate soat;
     private LocalDate tecnomecanica;
+    private StateServiceEnum status;
     private DriverToTruckResponse id_driver;
 }

@@ -16,6 +16,7 @@ import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.TruckRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.ITruckService;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
@@ -56,6 +57,7 @@ public class TruckService implements ITruckService {
 
     private Truck requestToEntity(TruckRequest truckRequest, Truck truck) {
         Driver findDriver = this.objDriverRepository.findById(truckRequest.getId_driver())
+
                 .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));
         // LocalDate soatDate = truckRequest.getSoat();
         // LocalDate technomechanicsDate = truckRequest.getTecnomecanica();
@@ -74,6 +76,7 @@ public class TruckService implements ITruckService {
             truck.setBody(truckRequest.getBody());
             truck.setId_driver_truck(findDriver);
         }
+
         return truck;
     }
 

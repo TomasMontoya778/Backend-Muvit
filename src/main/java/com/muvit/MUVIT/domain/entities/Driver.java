@@ -56,4 +56,10 @@ public class Driver {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Truck> truck;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "id")
+    private List<Assistant> assistants;
+    
 }

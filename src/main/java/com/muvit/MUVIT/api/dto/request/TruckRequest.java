@@ -24,5 +24,6 @@ public class TruckRequest {
      private LocalDate tecnomecanica;
      @NotNull(message = "The truck's Size is required")
      private BodyEnum body;
+     private String status;
      private String id_driver;
 }
