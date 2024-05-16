@@ -124,12 +124,6 @@ public class ServiceService implements IServiceService {
         return service.map(this::entityToResponse);
     }
 
-    @Override
-    public ServiceResponse getByUserId(String id) {
-        // ServiceEntity servicio = objServiceRepository.findServiceByUserId(id);
-        // return this.entityToResponse(servicio);
-        return null;
-    }
 
     private User findUser(String id) {
         return this.objUserRepository.findById(id)

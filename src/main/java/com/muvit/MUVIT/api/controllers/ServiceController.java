@@ -49,12 +49,6 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getById(id));
     }
 
-    @GetMapping(path = "/{userId}")
-    public ResponseEntity<ServiceResponse> getByUserId(
-            @PathVariable String id) {
-        return ResponseEntity.ok(this.serviceService.getByUserId(id));
-    }
-
     @PostMapping
     public ResponseEntity<ServiceResponse> insert(
             @Validated @RequestBody ServiceRequest serviceRequest) {
@@ -76,8 +70,9 @@ public class ServiceController {
     }
 
     @GetMapping(path = "/user/{userId}/active-service")
-    public ResponseEntity<ServiceResponse> getActiveServiceByUserId(@Validated @PathVariable String userId){
+    public ResponseEntity<ServiceResponse> getActiveServiceByUserId(@Validated @PathVariable String userId) {
         Optional<ServiceResponse> serviceResponse = this.serviceService.getActiveServiceByUserId(userId);
-        return serviceResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        return serviceResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
