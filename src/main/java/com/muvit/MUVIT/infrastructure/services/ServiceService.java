@@ -118,11 +118,13 @@ public class ServiceService implements IServiceService {
         ServiceEntity objServiceUpdate = this.requestToEntity(request, objServiceEntity);
         return this.entityToResponse(this.objServiceRepository.save(objServiceUpdate));
     }
+
     @Override
-    public Optional<ServiceResponse> getActiveServiceByUserId(String userId){
+    public Optional<ServiceResponse> getActiveServiceByUserId(String userId) {
         Optional<ServiceEntity> service = objServiceRepository.findActiveServiceByUserId(userId);
         return service.map(this::entityToResponse);
     }
+
     private User findUser(String id) {
         return this.objUserRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("No se encontró el ID del usuario"));
