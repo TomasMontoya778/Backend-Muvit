@@ -21,6 +21,7 @@ import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
 
 import lombok.AllArgsConstructor;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/service")
@@ -28,7 +29,8 @@ import lombok.AllArgsConstructor;
 public class ServiceController {
     @Autowired
     private final IServiceService serviceService;
-        @GetMapping
+
+    @GetMapping
     public ResponseEntity<Page<ServiceResponse>> get(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size) {
@@ -40,6 +42,12 @@ public class ServiceController {
     public ResponseEntity<ServiceResponse> getById(
             @PathVariable String id) {
         return ResponseEntity.ok(this.serviceService.getById(id));
+    }
+
+    @GetMapping(path = "/{userId}")
+    public ResponseEntity<ServiceResponse> getByUserId(
+            @PathVariable String id) {
+        return ResponseEntity.ok(this.serviceService.getByUserId(id));
     }
 
     @PostMapping
@@ -58,8 +66,7 @@ public class ServiceController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<ServiceResponse> update(
             @PathVariable String id,
-            @Validated @RequestBody ServiceRequest serviceRequest 
-    ) {
+            @Validated @RequestBody ServiceRequest serviceRequest) {
         return ResponseEntity.ok(this.serviceService.update(id, serviceRequest));
     }
 }

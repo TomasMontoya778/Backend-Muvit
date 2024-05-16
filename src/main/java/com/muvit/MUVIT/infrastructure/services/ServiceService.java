@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.infrastructure.services;
 
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +24,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class ServiceService implements IServiceService{
+public class ServiceService implements IServiceService {
     @Autowired
     private final ServiceRepository objServiceRepository;
     @Autowired
@@ -37,8 +36,10 @@ public class ServiceService implements IServiceService{
     public ServiceResponse getById(String id) {
         return this.entityToResponse(this.find(id));
     }
-    private ServiceEntity find (String id){
-        return this.objServiceRepository.findById(id).orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
+
+    private ServiceEntity find(String id) {
+        return this.objServiceRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("No se encontró el ID del servicio"));
     }
 
     @Override
@@ -50,7 +51,8 @@ public class ServiceService implements IServiceService{
         }
         return this.entityToResponse(this.objServiceRepository.save(objService));
     }
-    private ServiceResponse entityToResponse(ServiceEntity serviceEntity){
+
+    private ServiceResponse entityToResponse(ServiceEntity serviceEntity) {
         ServiceResponse serviceResponse = new ServiceResponse();
         serviceResponse.setId_service(serviceEntity.getId_service());
         serviceResponse.setTypeService(serviceEntity.getTypeService());
@@ -70,11 +72,12 @@ public class ServiceService implements IServiceService{
         serviceResponse.setDriver(driverResponse);
         return serviceResponse;
     }
-    private ServiceEntity requestToEntity (ServiceRequest serviceRequest, ServiceEntity objService){
+
+    private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
         User user = this.objUserRepository.findById(serviceRequest.getUser())
-        .orElseThrow(() -> new BadRequestException("It doesn't found any id."));
+                .orElseThrow(() -> new BadRequestException("It doesn't found any id."));
         Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
-        .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
+                .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
         objService.setTypeService(serviceRequest.getTypeService());
         objService.setDistance(serviceRequest.getDistance());
         objService.setAssistant(serviceRequest.getAssistant());
@@ -89,7 +92,6 @@ public class ServiceService implements IServiceService{
         System.out.println(objService);
         return objService;
     }
-
 
     @Override
     public void delete(String id) {
@@ -109,6 +111,18 @@ public class ServiceService implements IServiceService{
         ServiceEntity objServiceEntity = this.find(id);
         ServiceEntity objServiceUpdate = this.requestToEntity(request, objServiceEntity);
         return this.entityToResponse(this.objServiceRepository.save(objServiceUpdate));
+    }
+
+    @Override
+    public ServiceResponse getByUserId(String id) {
+        User user = this.findUser(id);
+        ServiceEntity servicio = objServiceRepository.getByUserId(id);
+        return this.entityToResponse(servicio);
+    }
+
+    private User findUser(String id) {
+        return this.objUserRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("No se encontró el ID del usuario"));
     }
 
 }
