@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ServiceResponse {
+public class ServiceToUserResponse {
     private String id_service;
     private ServicesEnum typeService;
     private String distance;
@@ -26,6 +26,5 @@ public class ServiceResponse {
     private LocalDate date;
     private LocalTime time;
     private StateServiceEnum statusService;
-    private UserToServiceResponse user;
     private DriverResponse driver;
 }

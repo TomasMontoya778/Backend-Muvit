@@ -100,6 +100,7 @@ public class DriverService implements IDriverService{
         response.setRol(rol);
         return response;
     }
+    
     private TruckDriverResponse entityToTruckDriverResponse(Truck truck){
         TruckDriverResponse listTruckDriverResponse = new TruckDriverResponse();
         listTruckDriverResponse.setId(truck.getId());

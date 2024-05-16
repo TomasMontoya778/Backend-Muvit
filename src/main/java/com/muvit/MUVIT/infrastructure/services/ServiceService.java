@@ -1,5 +1,8 @@
 package com.muvit.MUVIT.infrastructure.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
-import com.muvit.MUVIT.api.dto.response.UserResponse;
+import com.muvit.MUVIT.api.dto.response.UserToServiceResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.domain.entities.ServiceEntity;
 import com.muvit.MUVIT.domain.entities.User;
@@ -64,11 +67,11 @@ public class ServiceService implements IServiceService {
         serviceResponse.setStartPoint(serviceEntity.getStartPoint());
         serviceResponse.setTime(serviceEntity.getTime());
         serviceResponse.setStatusService(serviceEntity.getStatusService());
-        UserResponse userResponse = new UserResponse();
+        UserToServiceResponse userResponse = new UserToServiceResponse();
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
         DriverResponse driverResponse = new DriverResponse();
         BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
-        serviceResponse.setUserResponse(userResponse);
+        serviceResponse.setUser(userResponse);
         serviceResponse.setDriver(driverResponse);
         return serviceResponse;
     }
@@ -86,7 +89,8 @@ public class ServiceService implements IServiceService {
         objService.setFinalPoint(serviceRequest.getFinalPoint());
         objService.setDate(serviceRequest.getDate());
         objService.setTime(serviceRequest.getTime());
-        objService.setStatusService(StateServiceEnum.ACTIVE);
+        String status = serviceRequest.getStatusService();
+        objService.setStatusService(StateServiceEnum.valueOf(status));
         objService.setId_driver(driver);
         objService.setId_user(user);
         System.out.println(objService);
@@ -115,9 +119,9 @@ public class ServiceService implements IServiceService {
 
     @Override
     public ServiceResponse getByUserId(String id) {
-        User user = this.findUser(id);
-        ServiceEntity servicio = objServiceRepository.getByUserId(id);
-        return this.entityToResponse(servicio);
+        // ServiceEntity servicio = objServiceRepository.findServiceByUserId(id);
+        // return this.entityToResponse(servicio);
+        return null;
     }
 
     private User findUser(String id) {

@@ -5,5 +5,6 @@ import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 
 public interface IServiceService extends CrudService<ServiceRequest, ServiceResponse, String> {
     public ServiceResponse getById(String id);
+
     public ServiceResponse getByUserId(String idUsuario);
 }
