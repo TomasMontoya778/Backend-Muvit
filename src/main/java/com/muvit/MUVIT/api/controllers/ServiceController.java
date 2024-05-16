@@ -44,12 +44,6 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getById(id));
     }
 
-    @GetMapping(path = "/{userId}")
-    public ResponseEntity<ServiceResponse> getByUserId(
-            @PathVariable String id) {
-        return ResponseEntity.ok(this.serviceService.getByUserId(id));
-    }
-
     @PostMapping
     public ResponseEntity<ServiceResponse> insert(
             @Validated @RequestBody ServiceRequest serviceRequest) {

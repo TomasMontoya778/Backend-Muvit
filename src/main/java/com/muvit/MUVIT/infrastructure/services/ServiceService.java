@@ -116,14 +116,7 @@ public class ServiceService implements IServiceService {
         ServiceEntity objServiceUpdate = this.requestToEntity(request, objServiceEntity);
         return this.entityToResponse(this.objServiceRepository.save(objServiceUpdate));
     }
-
-    @Override
-    public ServiceResponse getByUserId(String id) {
-        // ServiceEntity servicio = objServiceRepository.findServiceByUserId(id);
-        // return this.entityToResponse(servicio);
-        return null;
-    }
-
+    
     private User findUser(String id) {
         return this.objUserRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("No se encontró el ID del usuario"));
