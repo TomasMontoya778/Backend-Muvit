@@ -74,6 +74,7 @@ public class TruckService implements ITruckService {
             truck.setTecnomecanica(truckRequest.getTecnomecanica());
             truck.setBody(truckRequest.getBody());
             truck.setId_driver_truck(findDriver);
+            truck.setLicensePlate(truckRequest.getLicensePlate());
         }
 
         return truck;
