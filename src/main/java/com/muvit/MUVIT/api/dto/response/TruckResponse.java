@@ -20,4 +20,5 @@ public class TruckResponse {
     private LocalDate soat;
     private LocalDate tecnomecanica;
     private DriverToTruckResponse id_driver;
+    private String licensePlate;
 }
