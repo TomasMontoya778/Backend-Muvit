@@ -93,6 +93,7 @@ public class ServiceService implements IServiceService {
                 truckResponse.setModel(truck.getModel());
                 truckResponse.setSoat(truck.getSoat());
                 truckResponse.setTecnomecanica(truck.getTecnomecanica());
+                truckResponse.setLicensePlate(truck.getLicensePlate());
                 truckList.add(truckResponse);
             }
         }

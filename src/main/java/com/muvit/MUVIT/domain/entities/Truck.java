@@ -38,8 +38,9 @@ public class Truck {
   private LocalDate tecnomecanica;
   @Enumerated(EnumType.STRING)
   private StateServiceEnum status;
+  @Column(nullable = false)
+  private String licensePlate;
 
-  
   /* Foreign Key */
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "id_driver_truck", referencedColumnName = "id_driver")
