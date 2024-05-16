@@ -1,6 +1,7 @@
 package com.muvit.MUVIT.infrastructure.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.UserRequest;
 import com.muvit.MUVIT.api.dto.response.RolResponse;
+import com.muvit.MUVIT.api.dto.response.ServiceToUserResponse;
+import com.muvit.MUVIT.api.dto.response.TruckDriverResponse;
 import com.muvit.MUVIT.api.dto.response.UserResponse;
+import com.muvit.MUVIT.api.dto.response.UserToServiceResponse;
 import com.muvit.MUVIT.domain.entities.Rol;
+import com.muvit.MUVIT.domain.entities.ServiceEntity;
+import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
@@ -35,36 +41,53 @@ public class UserService implements IUserService {
     }
 
     private User find(String id) {
-        return this.objUserRepository.findById(id).orElseThrow(() -> new BadRequestException("No hay registros con el ID suministrado"));
+        return this.objUserRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("No hay registros con el ID suministrado"));
     }
 
     @Override
     public UserResponse create(UserRequest request) {
         User objUser = this.requestToEntity(request, new User());
-        
+
         return this.entityToResponse(this.objUserRepository.save(objUser));
     }
 
     private UserResponse entityToResponse(User user) {
         UserResponse userResponse = new UserResponse();
-        BeanUtils.copyProperties(user, userResponse);
         RolResponse rol = new RolResponse();
+        List<ServiceToUserResponse> serviceList = new ArrayList<>();
+        if (user.getUserService() != null) {
+            for (ServiceEntity service : user.getUserService()) {
+                ServiceToUserResponse serviceResponse = entityToServiceToUserResponse(service);
+                BeanUtils.copyProperties(service, serviceResponse);
+                serviceList.add(serviceResponse);
+            }
+        }
         BeanUtils.copyProperties(user.getRol(), rol);
+        BeanUtils.copyProperties(user, userResponse);
+        userResponse.setService(serviceList);
         userResponse.setRol(rol);
         return userResponse;
     }
+
+    private ServiceToUserResponse entityToServiceToUserResponse(ServiceEntity service) {
+        ServiceToUserResponse listServiceToUserResponse = new ServiceToUserResponse();
+        BeanUtils.copyProperties(service, listServiceToUserResponse);
+        return listServiceToUserResponse;
+    }
+
     private User requestToEntity(UserRequest userRequest, User user) {
         Rol rol = this.objRolRepository.findById(userRequest.getRol())
                 .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));
-
-        
         user.setName(userRequest.getName());
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());
         user.setPhoneNumber(userRequest.getPhoneNumber());
         user.setRol(rol);
         System.out.println(user);
-        user.setUserService(new ArrayList<>());
+        if (user.getUserService() == null) {
+            user.setUserService(new ArrayList<>());
+        }
         return user;
     }
 

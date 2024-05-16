@@ -24,6 +24,7 @@ import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
 
 import lombok.AllArgsConstructor;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/service")
@@ -31,7 +32,8 @@ import lombok.AllArgsConstructor;
 public class ServiceController {
     @Autowired
     private final IServiceService serviceService;
-        @GetMapping
+
+    @GetMapping
     public ResponseEntity<Page<ServiceResponse>> get(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size) {
@@ -61,14 +63,14 @@ public class ServiceController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<ServiceResponse> update(
             @PathVariable String id,
-            @Validated @RequestBody ServiceRequest serviceRequest 
-    ) {
+            @Validated @RequestBody ServiceRequest serviceRequest) {
         return ResponseEntity.ok(this.serviceService.update(id, serviceRequest));
     }
 
     @GetMapping(path = "/user/{userId}/active-service")
-    public ResponseEntity<ServiceResponse> getActiveServiceByUserId(@Validated @PathVariable String userId){
+    public ResponseEntity<ServiceResponse> getActiveServiceByUserId(@Validated @PathVariable String userId) {
         Optional<ServiceResponse> serviceResponse = this.serviceService.getActiveServiceByUserId(userId);
-        return serviceResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        return serviceResponse.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

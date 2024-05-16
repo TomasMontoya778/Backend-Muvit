@@ -34,15 +34,15 @@ public class User {
     private String email;
     @Column(nullable = false, length = 10)
     private String phoneNumber;
-    
-    /* Foreign Key*/
+
+    /* Foreign Key */
     @OneToMany(mappedBy = "id_user", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<ServiceEntity> userService;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+    @JoinColumn(name = "id_user_rol", referencedColumnName = "id_rol")
     private Rol rol;
-    
+
 }
