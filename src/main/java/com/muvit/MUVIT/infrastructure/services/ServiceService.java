@@ -1,6 +1,8 @@
 package com.muvit.MUVIT.infrastructure.services;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -109,6 +111,11 @@ public class ServiceService implements IServiceService{
         ServiceEntity objServiceEntity = this.find(id);
         ServiceEntity objServiceUpdate = this.requestToEntity(request, objServiceEntity);
         return this.entityToResponse(this.objServiceRepository.save(objServiceUpdate));
+    }
+    @Override
+    public Optional<ServiceResponse> getActiveServiceByUserId(String userId){
+        Optional<ServiceEntity> service = objServiceRepository.findActiveServiceByUserId(userId);
+        return service.map(this::entityToResponse);
     }
 
 }

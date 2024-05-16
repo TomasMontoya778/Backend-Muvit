@@ -1,7 +1,11 @@
 package com.muvit.MUVIT.api.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +23,7 @@ import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -61,5 +66,11 @@ public class ServiceController {
             @Validated @RequestBody ServiceRequest serviceRequest 
     ) {
         return ResponseEntity.ok(this.serviceService.update(id, serviceRequest));
+    }
+
+    @GetMapping(path = "/user/{userId}/active-service")
+    public ResponseEntity<ServiceResponse> getActiveServiceByUserId(@Validated @PathVariable String userId){
+        Optional<ServiceResponse> serviceResponse = this.serviceService.getActiveServiceByUserId(userId);
+        return serviceResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
