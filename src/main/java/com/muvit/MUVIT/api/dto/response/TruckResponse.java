@@ -21,5 +21,5 @@ public class TruckResponse {
     private LocalDate soat;
     private LocalDate tecnomecanica;
     private StateServiceEnum status;
-    private DriverResponse id_driver;
+    private DriverToTruckResponse id_driver;
 }

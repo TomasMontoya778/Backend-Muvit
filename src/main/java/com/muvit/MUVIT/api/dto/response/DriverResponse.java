@@ -25,4 +25,7 @@ public class DriverResponse {
     private String email;
     private RolResponse rol;
     private List<AssistToDriverResp> assistants;
+
+    private List<TruckDriverResponse> truck;
+
 }
