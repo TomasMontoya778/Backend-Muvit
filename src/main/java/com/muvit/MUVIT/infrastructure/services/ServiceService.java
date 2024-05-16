@@ -3,6 +3,8 @@ package com.muvit.MUVIT.infrastructure.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -16,10 +18,13 @@ import com.muvit.MUVIT.api.dto.response.BasicRolResponse;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.api.dto.response.RolResponse;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
+import com.muvit.MUVIT.api.dto.response.TruckDriverResponse;
+import com.muvit.MUVIT.api.dto.response.UserResponse;
 import com.muvit.MUVIT.api.dto.response.UserToServiceResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.entities.ServiceEntity;
+import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.ServiceRepository;
@@ -76,6 +81,21 @@ public class ServiceService implements IServiceService {
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
         BasicRolResponse rolBasic = this.rolToBasicRolResponse(serviceEntity.getId_user().getRol());
         DriverResponse driverResponse = new DriverResponse();
+        List<TruckDriverResponse> truckList = new ArrayList<>();
+        Driver driver = serviceEntity.getId_driver();
+        if (driver.getTruck() != null) {
+            for(Truck truck : driver.getTruck()){
+                TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
+                truckResponse.setId(truck.getId());
+                truckResponse.setBody(truck.getBody());
+                truckResponse.setModel(truck.getModel());
+                truckResponse.setSoat(truck.getSoat());
+                truckResponse.setTecnomecanica(truck.getTecnomecanica());
+                truckList.add(truckResponse);
+            }
+        }
+        driverResponse.setTruck(truckList);
+        BeanUtils.copyProperties(driver, driverResponse);
         BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
         userResponse.setRol(rolBasic);
         serviceResponse.setUser(userResponse);
@@ -83,11 +103,24 @@ public class ServiceService implements IServiceService {
         return serviceResponse;
     }
 
+
     private BasicRolResponse rolToBasicRolResponse(Rol rol) {
         BasicRolResponse basicResponse = new BasicRolResponse();
         BeanUtils.copyProperties(rol, basicResponse);
         return basicResponse;
     }
+
+
+    private TruckDriverResponse entityToTruckDriverResponse(Truck truck){
+        TruckDriverResponse listTruckDriverResponse = new TruckDriverResponse();
+        listTruckDriverResponse.setId(truck.getId());
+        listTruckDriverResponse.setModel(truck.getModel());
+        listTruckDriverResponse.setBody(truck.getBody());
+        listTruckDriverResponse.setSoat(truck.getSoat());
+        listTruckDriverResponse.setTecnomecanica(truck.getTecnomecanica());
+        return listTruckDriverResponse;
+    }
+  
 
     private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
         User user = this.objUserRepository.findById(serviceRequest.getUser())

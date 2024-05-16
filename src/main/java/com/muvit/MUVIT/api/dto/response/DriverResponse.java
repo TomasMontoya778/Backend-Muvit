@@ -24,8 +24,7 @@ public class DriverResponse {
     private String phoneNumber;
     private String email;
     private RolResponse rol;
-    private List<AssistToDriverResp> assistants;
-
+    private List<AssistToDriverResp> assistants; 
     private List<TruckDriverResponse> truck;
 
 }
