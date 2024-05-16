@@ -27,5 +27,5 @@ public class ServiceResponse {
     private LocalTime time;
     private StateServiceEnum statusService;
     private UserToServiceResponse user;
-    private DriverResponse driver;
+    private DriverBasicResponse driver;
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.BasicRolResponse;
+import com.muvit.MUVIT.api.dto.response.DriverBasicResponse;
 import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.api.dto.response.RolResponse;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
@@ -80,11 +81,12 @@ public class ServiceService implements IServiceService {
         UserToServiceResponse userResponse = new UserToServiceResponse();
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
         BasicRolResponse rolBasic = this.rolToBasicRolResponse(serviceEntity.getId_user().getRol());
-        DriverResponse driverResponse = new DriverResponse();
+        BasicRolResponse rolBasicDriver = this.rolToBasicRolResponse(serviceEntity.getId_driver().getRol());
+        DriverBasicResponse driverResponse = new DriverBasicResponse();
         List<TruckDriverResponse> truckList = new ArrayList<>();
         Driver driver = serviceEntity.getId_driver();
         if (driver.getTruck() != null) {
-            for(Truck truck : driver.getTruck()){
+            for (Truck truck : driver.getTruck()) {
                 TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
                 truckResponse.setId(truck.getId());
                 truckResponse.setBody(truck.getBody());
@@ -98,11 +100,11 @@ public class ServiceService implements IServiceService {
         BeanUtils.copyProperties(driver, driverResponse);
         BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
         userResponse.setRol(rolBasic);
+        driverResponse.setRol(rolBasicDriver);
         serviceResponse.setUser(userResponse);
         serviceResponse.setDriver(driverResponse);
         return serviceResponse;
     }
-
 
     private BasicRolResponse rolToBasicRolResponse(Rol rol) {
         BasicRolResponse basicResponse = new BasicRolResponse();
@@ -110,8 +112,7 @@ public class ServiceService implements IServiceService {
         return basicResponse;
     }
 
-
-    private TruckDriverResponse entityToTruckDriverResponse(Truck truck){
+    private TruckDriverResponse entityToTruckDriverResponse(Truck truck) {
         TruckDriverResponse listTruckDriverResponse = new TruckDriverResponse();
         listTruckDriverResponse.setId(truck.getId());
         listTruckDriverResponse.setModel(truck.getModel());
@@ -120,7 +121,6 @@ public class ServiceService implements IServiceService {
         listTruckDriverResponse.setTecnomecanica(truck.getTecnomecanica());
         return listTruckDriverResponse;
     }
-  
 
     private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
         User user = this.objUserRepository.findById(serviceRequest.getUser())
