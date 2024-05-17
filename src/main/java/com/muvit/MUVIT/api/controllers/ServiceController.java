@@ -1,5 +1,6 @@
 package com.muvit.MUVIT.api.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,9 @@ public class ServiceController {
         Optional<ServiceResponse> serviceResponse = this.serviceService.getActiveServiceByUserId(userId);
         return serviceResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    @GetMapping(path = "/user/{userId}/inactive-service")
+    public ResponseEntity<List<ServiceResponse>> getInactiveServiceByUserId(@Validated @PathVariable String userId) {
+        return ResponseEntity.ok(this.serviceService.getInactiveServiceByUserId(userId));
     }
 }

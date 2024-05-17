@@ -165,6 +165,16 @@ public class ServiceService implements IServiceService {
     }
 
     @Override
+    public List<ServiceResponse> getInactiveServiceByUserId(String userId) {
+        List<ServiceResponse> listService = new ArrayList<>();
+        List<ServiceEntity> userService = this.objServiceRepository.findInactiveServiceByUserId(userId);
+        for(ServiceEntity serviceEntity : userService){
+            listService.add(this.entityToResponse(serviceEntity));
+        }
+        return listService;
+    }
+
+    @Override
     public Optional<ServiceResponse> getActiveServiceByUserId(String userId) {
         Optional<ServiceEntity> service = objServiceRepository.findActiveServiceByUserId(userId);
         return service.map(this::entityToResponse);

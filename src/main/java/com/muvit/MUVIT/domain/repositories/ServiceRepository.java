@@ -1,5 +1,6 @@
 package com.muvit.MUVIT.domain.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,6 @@ import com.muvit.MUVIT.domain.entities.ServiceEntity;
 public interface ServiceRepository extends JpaRepository<ServiceEntity, String>{
     @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'ACTIVE'")
     Optional<ServiceEntity> findActiveServiceByUserId(@Param("userId") String userId);
+    @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'INACTIVE'")
+    List<ServiceEntity> findInactiveServiceByUserId(@Param("userId") String userId);
 }
