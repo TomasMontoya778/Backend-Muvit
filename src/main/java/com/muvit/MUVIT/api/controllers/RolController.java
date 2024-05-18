@@ -58,19 +58,19 @@ public class RolController {
 
     
     
-    // @GetMapping(path = "/auth/")
-    // public ResponseEntity<Page<RolResponse>> get(
-    //         @RequestParam(defaultValue = "1") int page,
-    //         @RequestParam(defaultValue = "2") int size) {
+    @GetMapping(path = "/auth/")
+    public ResponseEntity<Page<RolResponse>> get(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "2") int size) {
 
-    //     return ResponseEntity.ok(this.rolService.getAll(page - 1, size));
-    // }
+        return ResponseEntity.ok(this.rolService.getAll(page - 1, size));
+    }
 
-    // @GetMapping(path = "/auth/{id}")
-    // public ResponseEntity<RolResponse> getById(
-    //         @PathVariable Long id) {
-    //     return ResponseEntity.ok(this.rolService.getById(id));
-    // }
+    @GetMapping(path = "/auth/{id}")
+    public ResponseEntity<RolResponse> getById(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(this.rolService.getById(id));
+    }
 
     // @PostMapping(path = "")
     //  public ResponseEntity<RolResponse> insert(
@@ -78,22 +78,20 @@ public class RolController {
     //     return ResponseEntity.ok(this.rolService.create(rol));
     //  }
 
-    // @DeleteMapping(path = "/auth/{id}")
-    // public ResponseEntity<Void> delete(@PathVariable Long id) {
-    //     this.rolService.delete(id);
+    @DeleteMapping(path = "/auth/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        this.rolService.delete(id);
 
-    //     return ResponseEntity.noContent().build();
-    // }
+        return ResponseEntity.noContent().build();
+    }
 
-    // @PutMapping(path = "/auth/{id}")
-    // public ResponseEntity<RolResponse> update(
-    //         @PathVariable Long id, // id por url
-    //         @Validated @RequestBody RolRequest company // compañia actualizada
-    // ) {
-    //     return ResponseEntity.ok(this.rolService.update(id, company));
+    @PutMapping(path = "/auth/{id}")
+    public ResponseEntity<RolResponse> update(
+            @PathVariable Long id, // id por url
+            @Validated @RequestBody RolRequest company // compañia actualizada
+    ) {
+        return ResponseEntity.ok(this.rolService.update(id, company));
         
-    // }
-
-    
+    }
     
 }
