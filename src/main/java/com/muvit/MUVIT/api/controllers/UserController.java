@@ -55,16 +55,13 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getById(id));
     }
 
-    @Operation(summary = "This EndPoint insert an user depending his requirements and params.", description = "Just have send all the params required fot the user and contact data.")
+    @Operation(summary = "This EndPoint insert an user depending his requirements and params.", description = "Just have send all the params required for the user and contact data.")
     @PostMapping
     public ResponseEntity<UserResponse> insert(
             @Validated @RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(this.userService.create(userRequest));
     }
 
-    @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
-    })
     @Operation(summary = "This EndPoint delete an user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be eliminated.")
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
