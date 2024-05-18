@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -74,8 +76,15 @@ public class ServiceController {
         return serviceResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
     @GetMapping(path = "/user/{userId}/inactive-service")
-    public ResponseEntity<List<ServiceResponse>> getInactiveServiceByUserId(@Validated @PathVariable String userId) {
-        return ResponseEntity.ok(this.serviceService.getInactiveServiceByUserId(userId));
+    public ResponseEntity<Page<ServiceResponse>> getInactiveServiceByUserId(@Validated @PathVariable String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        if (page < 0) {
+            page = 0;
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(this.serviceService.getInactiveServiceByUserId(userId, pageable));
     }
 }

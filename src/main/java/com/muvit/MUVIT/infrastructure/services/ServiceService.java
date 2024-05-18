@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.ServiceRequest;
@@ -165,13 +166,9 @@ public class ServiceService implements IServiceService {
     }
 
     @Override
-    public List<ServiceResponse> getInactiveServiceByUserId(String userId) {
-        List<ServiceResponse> listService = new ArrayList<>();
-        List<ServiceEntity> userService = this.objServiceRepository.findInactiveServiceByUserId(userId);
-        for(ServiceEntity serviceEntity : userService){
-            listService.add(this.entityToResponse(serviceEntity));
-        }
-        return listService;
+    public Page<ServiceResponse> getInactiveServiceByUserId(String userId,Pageable pageable) {
+        Page<ServiceEntity> userService = this.objServiceRepository.findInactiveServiceByUserId(userId,pageable);
+        return userService.map(this::entityToResponse);
     }
 
     @Override
