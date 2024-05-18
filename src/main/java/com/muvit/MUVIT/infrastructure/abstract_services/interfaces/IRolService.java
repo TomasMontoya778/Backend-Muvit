@@ -10,4 +10,8 @@ public interface IRolService extends CrudService<RolRequest, RolResponse, Long> 
 
         @Query(value = "select r from rol r where r.rol = 'Driver'")
         public RolResponse findByRol(String rol);
+
+        
+
+
 }

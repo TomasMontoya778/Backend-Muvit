@@ -24,8 +24,6 @@ public class AssistReq {
     @Size(min = 0, max = 40, message = "Assistant DNI exceeds the number of characters allowed")
     @NotBlank(message = "Assistant DNI is required")
     private String DNI;
-    @NotBlank(message = "Assistant DNI type is required")
+    @NotBlank(message = "ID driver is required")
     private String driver;
-
-
 }

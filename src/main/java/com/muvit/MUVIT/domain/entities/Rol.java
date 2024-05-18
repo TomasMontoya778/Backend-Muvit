@@ -1,5 +1,11 @@
 package com.muvit.MUVIT.domain.entities;
 
+import java.util.Collection;
+import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.muvit.MUVIT.util.enums.RolEnum;
 
 import jakarta.persistence.Column;
@@ -19,7 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Rol {
+public class Rol implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_rol;
@@ -30,4 +36,32 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolEnum rolEnum;
     private String userPhoto;
+    
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.rolEnum.name()));
+    }
+    @Override
+    public String getUsername() {
+        return this.nameUser;
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
+

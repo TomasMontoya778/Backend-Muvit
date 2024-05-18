@@ -1,6 +1,4 @@
 package com.muvit.MUVIT.api.dto.request;
-
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +15,5 @@ public class RolRequest {
      @NotBlank(message = "User rol is required")
      private String rolEnum;
      private String userPhoto;
+
 }

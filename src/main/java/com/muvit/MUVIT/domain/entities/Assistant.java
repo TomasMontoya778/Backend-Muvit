@@ -33,10 +33,8 @@ public class Assistant {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private DNITypeEnum DNI_type;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String DNI;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name =  "id_driver", referencedColumnName = "id_driver")
     private Driver driver;

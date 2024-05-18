@@ -81,6 +81,8 @@ public class RolService implements IRolService {
     @Override
     public RolResponse findByRol(String rol) {
         // TODO Auto-generated method stub
-        throw new BadRequestException("Unimplemented method 'findByRol'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByRol'");
     }
+
+
 }
