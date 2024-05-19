@@ -46,7 +46,7 @@ public class Driver {
     @OneToMany(mappedBy = "id_driver", cascade = CascadeType.ALL, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<ServiceEntity> driverService;
+    private List<Service> driverService;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_driver_rol", referencedColumnName = "id_rol")
@@ -56,10 +56,4 @@ public class Driver {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Truck> truck;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "id")
-    private List<Assistant> assistants;
-    
 }

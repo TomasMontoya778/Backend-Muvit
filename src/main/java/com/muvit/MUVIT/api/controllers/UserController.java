@@ -48,40 +48,44 @@ public class UserController {
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })
-    @Operation(summary = "This EndPoint gets an user depending his ID.", description = "Just have send an ID, and if that ID is same as user's ID, It is obtained and It will be displayed.")
+    @Operation(summary = "This EndPoint gets a user depending his ID.", description = "Just have send an ID, and if that ID is same as user's ID, It is obtained and It will be displayed.")
     @GetMapping(path = "/{id}")
     public ResponseEntity<UserResponse> getById(
             @PathVariable String id) {
         return ResponseEntity.ok(this.userService.getById(id));
     }
 
-    @Operation(summary = "This EndPoint insert an user depending his requirements and params.", description = "Just have send all the params required for the user and contact data.")
+    @Operation(summary = "This EndPoint insert a user depending his requirements and params.", description = "Just have send all the params required fot the user and contact data.")
     @PostMapping
     public ResponseEntity<UserResponse> insert(
-            @Validated @RequestBody UserRequest userRequest) {
-        return ResponseEntity.ok(this.userService.create(userRequest));
+            @Validated @RequestBody UserRequest company) {
+        return ResponseEntity.ok(this.userService.create(company));
     }
 
-    @Operation(summary = "This EndPoint delete an user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be eliminated.")
+    @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+    })
+    @Operation(summary = "This EndPoint delete a user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be eliminated.")
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.userService.delete(id);
+
         return ResponseEntity.noContent().build();
     }
 
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })
-    @Operation(summary = "This EndPoint update an user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be update, but you have to send the news params.")
+    @Operation(summary = "This EndPoint update a user depending his ID", description = "Just have send an ID, and if that ID is same as user's ID, It will be update, but you have to send the news params.")
     @PutMapping(path = "/{id}")
     public ResponseEntity<UserResponse> update(
             @PathVariable String id, // id por url
-            @Validated @RequestBody UserRequest userRequest // compañia actualizada
+            @Validated @RequestBody UserRequest company // compañia actualizada
     ) {
-        return ResponseEntity.ok(this.userService.update(id, userRequest));
+        return ResponseEntity.ok(this.userService.update(id, company));
     }
 
 }
