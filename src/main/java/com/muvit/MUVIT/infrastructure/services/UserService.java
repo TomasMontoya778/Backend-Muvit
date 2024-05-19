@@ -10,11 +10,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.UserRequest;
+import com.muvit.MUVIT.api.dto.response.PaymentToUserResponse;
 import com.muvit.MUVIT.api.dto.response.RolResponse;
 import com.muvit.MUVIT.api.dto.response.ServiceToUserResponse;
 import com.muvit.MUVIT.api.dto.response.TruckDriverResponse;
 import com.muvit.MUVIT.api.dto.response.UserResponse;
 import com.muvit.MUVIT.api.dto.response.UserToServiceResponse;
+import com.muvit.MUVIT.domain.entities.Payment;
 import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.entities.ServiceEntity;
 import com.muvit.MUVIT.domain.entities.Truck;
@@ -22,7 +24,7 @@ import com.muvit.MUVIT.domain.entities.User;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IUserService;
-
+import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import lombok.AllArgsConstructor;
@@ -56,6 +58,7 @@ public class UserService implements IUserService {
         UserResponse userResponse = new UserResponse();
         RolResponse rol = new RolResponse();
         List<ServiceToUserResponse> serviceList = new ArrayList<>();
+        List<PaymentToUserResponse> paymentList = new ArrayList<>();
         if (user.getUserService() != null) {
             for (ServiceEntity service : user.getUserService()) {
                 ServiceToUserResponse serviceResponse = entityToServiceToUserResponse(service);
@@ -63,9 +66,17 @@ public class UserService implements IUserService {
                 serviceList.add(serviceResponse);
             }
         }
+        if (user.getPaymentMethods() != null) {
+            for (Payment payment : user.getPaymentMethods()) {
+                PaymentToUserResponse paymentResponse = entityToPaymentToUserResponse(payment);
+                BeanUtils.copyProperties(payment, paymentResponse);
+                paymentList.add(paymentResponse);
+            }
+        }
         BeanUtils.copyProperties(user.getRol(), rol);
         BeanUtils.copyProperties(user, userResponse);
         userResponse.setService(serviceList);
+        userResponse.setPaymentMethods(paymentList);
         userResponse.setRol(rol);
         return userResponse;
     }
@@ -74,6 +85,12 @@ public class UserService implements IUserService {
         ServiceToUserResponse listServiceToUserResponse = new ServiceToUserResponse();
         BeanUtils.copyProperties(service, listServiceToUserResponse);
         return listServiceToUserResponse;
+    }
+
+    private PaymentToUserResponse entityToPaymentToUserResponse(Payment payment) {
+        PaymentToUserResponse listPaymentToUserResponse = new PaymentToUserResponse();
+        BeanUtils.copyProperties(payment, listPaymentToUserResponse);
+        return listPaymentToUserResponse;
     }
 
     private User requestToEntity(UserRequest userRequest, User user) {

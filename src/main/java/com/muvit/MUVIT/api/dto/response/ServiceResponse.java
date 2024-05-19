@@ -3,6 +3,7 @@ package com.muvit.MUVIT.api.dto.response;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.enums.ServicesEnum;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
@@ -28,4 +29,5 @@ public class ServiceResponse {
     private StateServiceEnum statusService;
     private UserToServiceResponse user;
     private DriverBasicResponse driver;
+    private PaymentMethods paymentMethod;
 }

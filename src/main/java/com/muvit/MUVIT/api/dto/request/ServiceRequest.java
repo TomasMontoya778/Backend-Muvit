@@ -37,7 +37,7 @@ public class ServiceRequest {
     private String statusService;
     @NotBlank(message = "The user id is required")
     private String user;
-    @NotBlank(message = "The driver id is required")
     private String driver;
+    private String paymentMethod;
 
 }

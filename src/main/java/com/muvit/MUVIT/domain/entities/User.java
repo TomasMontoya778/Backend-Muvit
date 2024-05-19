@@ -26,7 +26,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @Column(length = 20, nullable = false)
+    @Column(length = 30, nullable = false)
     private String name;
     @Column(length = 20, nullable = false)
     private String lastName;
@@ -40,6 +40,11 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<ServiceEntity> userService;
+
+    @OneToMany(mappedBy = "idUser", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Payment> paymentMethods;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_rol", referencedColumnName = "id_rol")

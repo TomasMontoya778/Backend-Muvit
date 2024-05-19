@@ -32,6 +32,7 @@ import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.ServiceRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
+import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
@@ -78,6 +79,7 @@ public class ServiceService implements IServiceService {
         serviceResponse.setFinalPoint(serviceEntity.getFinalPoint());
         serviceResponse.setStartPoint(serviceEntity.getStartPoint());
         serviceResponse.setTime(serviceEntity.getTime());
+        serviceResponse.setPaymentMethod(serviceEntity.getPayment());
         serviceResponse.setStatusService(serviceEntity.getStatusService());
         UserToServiceResponse userResponse = new UserToServiceResponse();
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
@@ -137,6 +139,8 @@ public class ServiceService implements IServiceService {
         objService.setFinalPoint(serviceRequest.getFinalPoint());
         objService.setDate(serviceRequest.getDate());
         objService.setTime(serviceRequest.getTime());
+        String payment = serviceRequest.getPaymentMethod();
+        objService.setPayment(PaymentMethods.valueOf(payment));
         String status = serviceRequest.getStatusService();
         objService.setStatusService(StateServiceEnum.valueOf(status));
         objService.setId_driver(driver);
@@ -166,8 +170,8 @@ public class ServiceService implements IServiceService {
     }
 
     @Override
-    public Page<ServiceResponse> getInactiveServiceByUserId(String userId,Pageable pageable) {
-        Page<ServiceEntity> userService = this.objServiceRepository.findInactiveServiceByUserId(userId,pageable);
+    public Page<ServiceResponse> getInactiveServiceByUserId(String userId, Pageable pageable) {
+        Page<ServiceEntity> userService = this.objServiceRepository.findInactiveServiceByUserId(userId, pageable);
         return userService.map(this::entityToResponse);
     }
 
@@ -177,16 +181,9 @@ public class ServiceService implements IServiceService {
         return service.map(this::entityToResponse);
     }
 
-    
     @Override
     public Page<ServiceResponse> getAllActiveService(Pageable pageable) {
         Page<ServiceEntity> service = objServiceRepository.getAllActiveService(pageable);
         return service.map(this::entityToResponse);
     }
-
-    private User findUser(String id) {
-        return this.objUserRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("No se encontró el ID del usuario"));
-    }
-
 }
