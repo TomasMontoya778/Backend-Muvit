@@ -1,5 +1,4 @@
 package com.muvit.MUVIT.api.dto.request;
-
 import com.muvit.MUVIT.util.enums.BodyEnum;
 
 import java.time.LocalDate;
@@ -10,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @AllArgsConstructor
@@ -24,8 +24,5 @@ public class TruckRequest {
      private LocalDate tecnomecanica;
      @NotNull(message = "The truck's Size is required")
      private BodyEnum body;
-     private String status;
      private String id_driver;
-     @NotNull(message = "The truck's licensePlate is required")
-     private String licensePlate;
 }

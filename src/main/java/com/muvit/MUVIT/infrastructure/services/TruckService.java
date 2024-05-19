@@ -1,7 +1,5 @@
 package com.muvit.MUVIT.infrastructure.services;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,88 +7,66 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.TruckRequest;
-import com.muvit.MUVIT.api.dto.response.DriverToTruckResponse;
+import com.muvit.MUVIT.api.dto.response.DriverResponse;
 import com.muvit.MUVIT.api.dto.response.TruckResponse;
 import com.muvit.MUVIT.domain.entities.Driver;
 import com.muvit.MUVIT.domain.entities.Truck;
 import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.TruckRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.ITruckService;
-import com.muvit.MUVIT.util.exceptions.BadRequestException;
+import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class TruckService implements ITruckService {
+public class TruckService implements ITruckService{
 
     @Autowired
     private final TruckRepository objTruckRepository;
     @Autowired
     private final DriverRepository objDriverRepository;
-
     @Override
     public TruckResponse getById(String id) {
         return this.entityToResponse(this.find(id));
     }
-
-    private Truck find(String id) {
-        return this.objTruckRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("No hay registros con el id suministrado"));
+    private Truck find(String id){
+        return this.objTruckRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Truck"));
     }
-
     @Override
     public TruckResponse create(TruckRequest request) {
         Truck truck = this.requestToEntity(request, new Truck());
         return this.entityToResponse(this.objTruckRepository.save(truck));
     }
 
-    private TruckResponse entityToResponse(Truck truck) {
+    private TruckResponse entityToResponse(Truck truck){
         TruckResponse truckResponse = new TruckResponse();
-        DriverToTruckResponse driverResponse = new DriverToTruckResponse();
+        DriverResponse driverResponse = new DriverResponse();
         BeanUtils.copyProperties(truck, truckResponse);
         BeanUtils.copyProperties(truck.getId_driver_truck(), driverResponse);
         truckResponse.setId_driver(driverResponse);
         return truckResponse;
     }
 
-    private Truck requestToEntity(TruckRequest truckRequest, Truck truck) {
+    private Truck requestToEntity(TruckRequest truckRequest, Truck truck){
         Driver findDriver = this.objDriverRepository.findById(truckRequest.getId_driver())
-
-                .orElseThrow(() -> new BadRequestException("No hay contenido disponible con el ID suministrado"));
-        // LocalDate soatDate = truckRequest.getSoat();
-        // LocalDate technomechanicsDate = truckRequest.getTecnomecanica();
-        if (truckRequest.getSoat().plusYears(1).isBefore(LocalDate.now())
-                && truckRequest.getTecnomecanica().plusYears(1).isBefore(LocalDate.now())) {
-            BadRequestException error = new BadRequestException("Your Soat and Technomechanics are out of date.");
-            throw error;
-        } else if (truckRequest.getTecnomecanica().plusYears(1).isBefore(LocalDate.now())
-                || truckRequest.getSoat().plusYears(1).isBefore(LocalDate.now())) {
-            BadRequestException error = new BadRequestException("Your Soat or Technomechanics are out of date.");
-            throw error;
-        } else {
-            truck.setModel(truckRequest.getModel());
-            truck.setSoat(truckRequest.getSoat());
-            truck.setTecnomecanica(truckRequest.getTecnomecanica());
-            truck.setBody(truckRequest.getBody());
-            truck.setId_driver_truck(findDriver);
-            truck.setLicensePlate(truckRequest.getLicensePlate());
-        }
-
+        .orElseThrow(()-> new IdNotFoundException("Driver"));
+        truck.setModel(truckRequest.getModel());
+        truck.setSoat(truckRequest.getSoat());
+        truck.setTecnomecanica(truckRequest.getTecnomecanica());
+        truck.setBody(truckRequest.getBody());
+        truck.setId_driver_truck(findDriver);
         return truck;
     }
 
     @Override
     public void delete(String id) {
-        Truck truck = this.find(id);
-
-        this.objTruckRepository.delete(truck);
+        this.objTruckRepository.deleteById(id);
     }
 
     @Override
     public Page<TruckResponse> getAll(int page, int size) {
-        if (page < 0)
-            page = 0;
+        if(page < 0) page = 0;
         PageRequest pageRequest = PageRequest.of(page, size);
         return this.objTruckRepository.findAll(pageRequest).map(this::entityToResponse);
     }
@@ -101,4 +77,5 @@ public class TruckService implements ITruckService {
         Truck truckToUpdate = this.requestToEntity(request, truck);
         return this.entityToResponse(this.objTruckRepository.save(truckToUpdate));
     }
+
 }

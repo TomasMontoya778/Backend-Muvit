@@ -2,7 +2,6 @@ package com.muvit.MUVIT.api.dto.request;
 
 
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -27,7 +26,6 @@ public class DriverRequest {
     private String DNI;
     @NotBlank(message = "Driver's telephone number is required")
     private String phoneNumber;
-    @Email
     @NotBlank(message = "Driver's email is required")
     private String email;
     private Long rol;

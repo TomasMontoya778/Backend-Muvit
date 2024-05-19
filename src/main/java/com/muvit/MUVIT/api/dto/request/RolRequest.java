@@ -15,6 +15,5 @@ public class RolRequest {
      @NotBlank(message = "User password is required")
      private String password;
      @NotBlank(message = "User rol is required")
-     private String rolEnum;
-     private String userPhoto;
+     private String rol;
 }

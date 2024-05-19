@@ -2,7 +2,6 @@ package com.muvit.MUVIT.infrastructure.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.muvit.MUVIT.api.dto.request.RolRequest;
@@ -11,7 +10,7 @@ import com.muvit.MUVIT.domain.entities.Rol;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IRolService;
 import com.muvit.MUVIT.util.enums.RolEnum;
-import com.muvit.MUVIT.util.exceptions.BadRequestException;
+import com.muvit.MUVIT.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -30,29 +29,25 @@ public class RolService implements IRolService {
 
     @Override
     public void delete(Long id) {
-        Rol rol = this.find(id);
-        this.rolRepository.delete(rol);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public Page<RolResponse> getAll(int page, int size) {
-        if(page < 0) page = 0;
-        PageRequest pagination = PageRequest.of(page, size);
-        return this.rolRepository.findAll(pagination).map(this::entityToResponse);
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public RolResponse update(Long id, RolRequest request) {
-        Rol rol = this.find(id);
-        Rol rolUpdate = this.requestToEntity(request, rol);
-        return this.entityToResponse(this.rolRepository.save(rolUpdate));
+        // TODO Auto-generated method stub
+        return null;
     }
 
-    private Rol find(Long id) {
-        return this.rolRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("No hay registros con el ID sumnistrado"));
-    }
-
+    private Rol find(Long id){
+        return this.rolRepository.findById(id).orElseThrow(()-> new IdNotFoundException("Rol"));
+    } 
     @Override
     public RolResponse getById(Long id) {
         return this.entityToResponse(this.find(id));
@@ -61,10 +56,8 @@ public class RolService implements IRolService {
     private Rol requestToEntity(RolRequest request, Rol rol) {
         rol.setNameUser(request.getNameUser());
         rol.setPassword(request.getPassword());
-
-        String enume = request.getRolEnum();
-        rol.setRolEnum(RolEnum.valueOf(enume));
-        rol.setUserPhoto(request.getUserPhoto());
+        String enume = request.getRol();
+        rol.setRol_enum(RolEnum.valueOf(enume));
         return rol;
     }
 
@@ -73,14 +66,7 @@ public class RolService implements IRolService {
         response.setId_rol(entity.getId_rol());
         response.setNameUser(entity.getNameUser());
         response.setPassword(entity.getPassword());
-        response.setRolEnum(entity.getRolEnum());
-        response.setUserPhoto(entity.getUserPhoto());
+        response.setRol(entity.getRol_enum());
         return response;
-    }
-
-    @Override
-    public RolResponse findByRol(String rol) {
-        // TODO Auto-generated method stub
-        throw new BadRequestException("Unimplemented method 'findByRol'");
     }
 }
