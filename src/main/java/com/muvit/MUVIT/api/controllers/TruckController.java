@@ -81,5 +81,4 @@ public class TruckController {
             @Validated @RequestBody TruckRequest truckRequest) {
         return ResponseEntity.ok(this.truckService.update(id, truckRequest));
     }
-
 }
