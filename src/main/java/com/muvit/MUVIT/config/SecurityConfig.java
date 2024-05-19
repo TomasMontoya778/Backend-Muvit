@@ -24,7 +24,7 @@ public class SecurityConfig {
         private final JwtFilter jwtFilter;
     private final String[] PUBLIC_RESOURCES = {"/services/public/get", "/auth/**"};
 
-    private final String[] ADMIN_RESOURCES = { "/register/driver"};
+    private final String[] ADMIN_RESOURCES = { "/rol/get"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -32,6 +32,7 @@ public class SecurityConfig {
         return http
         .csrf(csrf -> csrf.disable()) 
         .authorizeHttpRequests(authRequest -> authRequest
+        .requestMatchers(ADMIN_RESOURCES).hasAuthority(RolEnum.Admin.name())
         .requestMatchers(PUBLIC_RESOURCES).permitAll()
         .anyRequest().authenticated())
         .sessionManagement(seesionManager -> seesionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authenticationProvider)

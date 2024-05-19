@@ -29,7 +29,7 @@ import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth/user")
 @AllArgsConstructor
 @Tag(name = "Endpoints User")
 public class UserController {

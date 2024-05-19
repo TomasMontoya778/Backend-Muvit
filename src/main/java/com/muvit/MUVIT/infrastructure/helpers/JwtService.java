@@ -16,18 +16,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-
 @Component
 public class JwtService {
-
     private final String SECRET_KEY = "Y29udHJhc2XDsWEgc3VwZXIgc2VjcmV0YSBxdWUgbmFkaWUgc2FiZSBzb2xvIHlvIHNl";
-
     public SecretKey getKey(){
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
 
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
     public String getToken(Map<String, Object> claims, Rol user){
         return  Jwts.builder()
         .claims(claims) // Agrego el cuerpo de jwt
@@ -37,15 +33,12 @@ public class JwtService {
         .signWith(this.getKey()) // Firmar el key
         .compact(); 
     }
-
     public String getToken(Rol user){
         Map<String, Object> claims = new HashMap<>();
-
         claims.put("id", user.getId_rol());
         claims.put("role", user.getRolEnum().name());
         return getToken(claims, user);
     }
-
     public Claims getAllClaims(String token){
 
         return Jwts
@@ -60,17 +53,13 @@ public class JwtService {
         final Claims claims = this.getAllClaims(token);
         return claimsResolver.apply(claims);
     }
-
-
     // Metodo para obtener el subject del jwt 
     public String getUserNameFromToken(String token){
         return this.getClaim(token, Claims::getSubject);
     }
-
     public Date getExpiration (String token){
        return this.getClaim(token, Claims::getExpiration);
     }
-
     public boolean isTokenExpired(String token){
         return this.getExpiration(token).before(new Date());
     }
@@ -79,5 +68,4 @@ public class JwtService {
 
         return userName.equals(user.getUsername()) && !this.isTokenExpired(token);
     }
-
 }

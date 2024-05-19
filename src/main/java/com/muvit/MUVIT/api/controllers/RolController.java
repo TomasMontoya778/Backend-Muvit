@@ -55,10 +55,7 @@ public class RolController {
 
         return ResponseEntity.ok(this.IAuthService.registerUser(request));
     }
-
-    
-    
-    @GetMapping(path = "/auth/")
+    @GetMapping(path = "/rol/get")
     public ResponseEntity<Page<RolResponse>> get(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "2") int size) {
@@ -66,7 +63,7 @@ public class RolController {
         return ResponseEntity.ok(this.rolService.getAll(page - 1, size));
     }
 
-    @GetMapping(path = "/auth/{id}")
+    @GetMapping(path = "/rol/get/{id}")
     public ResponseEntity<RolResponse> getById(
             @PathVariable Long id) {
         return ResponseEntity.ok(this.rolService.getById(id));
@@ -78,14 +75,14 @@ public class RolController {
     //     return ResponseEntity.ok(this.rolService.create(rol));
     //  }
 
-    @DeleteMapping(path = "/auth/{id}")
+    @DeleteMapping(path = "/auth/rol/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         this.rolService.delete(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(path = "/auth/{id}")
+    @PutMapping(path = "/auth/rol/{id}")
     public ResponseEntity<RolResponse> update(
             @PathVariable Long id, // id por url
             @Validated @RequestBody RolRequest company // compañia actualizada
