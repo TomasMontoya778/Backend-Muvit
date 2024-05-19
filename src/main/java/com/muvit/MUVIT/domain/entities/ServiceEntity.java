@@ -3,6 +3,7 @@ package com.muvit.MUVIT.domain.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.enums.ServicesEnum;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
@@ -48,6 +49,8 @@ public class ServiceEntity {
     private LocalDate date;
     @Column(nullable = false)
     private LocalTime time;
+    @Column(nullable = false)
+    private PaymentMethods payment;
 
     /* Foreign Keys */
     @ManyToOne(fetch = FetchType.LAZY)
