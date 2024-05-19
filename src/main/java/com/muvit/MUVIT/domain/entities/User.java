@@ -10,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +26,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @Column(length = 20, nullable = false)
+    @Column(length = 30, nullable = false)
     private String name;
     @Column(length = 20, nullable = false)
     private String lastName;
@@ -34,15 +34,20 @@ public class User {
     private String email;
     @Column(nullable = false, length = 10)
     private String phoneNumber;
-    
-    /* Foreign Key*/
+
+    /* Foreign Key */
     @OneToMany(mappedBy = "id_user", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Service> userService;
+    private List<ServiceEntity> userService;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idUser", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Payment> paymentMethods;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_rol", referencedColumnName = "id_rol")
     private Rol rol;
-    
+
 }

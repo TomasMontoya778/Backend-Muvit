@@ -3,6 +3,7 @@ package com.muvit.MUVIT.domain.entities;
 import java.time.LocalDate;
 
 import com.muvit.MUVIT.util.enums.BodyEnum;
+import com.muvit.MUVIT.util.enums.StateServiceEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +36,10 @@ public class Truck {
   private LocalDate soat;
   @Column(nullable = false)
   private LocalDate tecnomecanica;
+  @Enumerated(EnumType.STRING)
+  private StateServiceEnum status;
+  @Column(nullable = false)
+  private String licensePlate;
 
   /* Foreign Key */
   @ManyToOne(fetch = FetchType.LAZY)
