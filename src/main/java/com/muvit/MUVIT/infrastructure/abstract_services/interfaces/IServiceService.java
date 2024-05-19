@@ -14,5 +14,8 @@ public interface IServiceService extends CrudService<ServiceRequest, ServiceResp
     public Optional<ServiceResponse> getActiveServiceByUserId(String userId);
 
     public Page<ServiceResponse> getInactiveServiceByUserId(String userId, Pageable pageable);
+
     public Page<ServiceResponse> getAllActiveService(Pageable pageable);
+    
+    public Page<ServiceResponse> getInactiveServiceByDriverId(String driverId, Pageable pageable);
 }

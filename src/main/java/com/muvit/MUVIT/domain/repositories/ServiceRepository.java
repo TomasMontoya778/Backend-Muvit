@@ -16,8 +16,13 @@ import com.muvit.MUVIT.domain.entities.ServiceEntity;
 public interface ServiceRepository extends JpaRepository<ServiceEntity, String>{
     @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'ACTIVE'")
     Optional<ServiceEntity> findActiveServiceByUserId(@Param("userId") String userId);
+
     @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'INACTIVE'")
     Page<ServiceEntity> findInactiveServiceByUserId(@Param("userId") String userId, Pageable pageable);
+
     @Query(value = "select s from service s JOIN s.id_user u WHERE s.statusService = 'ACTIVE'")
     Page<ServiceEntity> getAllActiveService(Pageable pageable);
+
+    @Query(value = "select s from service s JOIN s.id_driver d WHERE d.id_driver = :driverId AND s.statusService = 'INACTIVE'")
+    Page<ServiceEntity> findInactiveServiceByDriverId(@Param("driverId") String driverId, Pageable pageable);
 }
