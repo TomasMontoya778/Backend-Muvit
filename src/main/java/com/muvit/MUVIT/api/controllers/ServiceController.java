@@ -1,6 +1,5 @@
 package com.muvit.MUVIT.api.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class ServiceController {
     @GetMapping
     public ResponseEntity<Page<ServiceResponse>> get(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "2") int size) {
+            @RequestParam(defaultValue = "10") int size) {
 
         return ResponseEntity.ok(this.serviceService.getAll(page - 1, size));
     }
@@ -113,5 +112,16 @@ public class ServiceController {
         }
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByUserId(userId, pageable));
+    }
+    @Operation(summary = "This EndPoint gets all registered actives sevices, it also has a paging function that only displays depending on the page and listing size.", description = "you must send the page and corresponding size to list the actives services")
+    @GetMapping(path = "/actives-services")
+    public ResponseEntity<Page<ServiceResponse>> getAllActiveService(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        if (page < 0) {
+            page = 0;
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(this.serviceService.getAllActiveService(pageable));
     }
 }
