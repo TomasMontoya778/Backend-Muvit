@@ -1,31 +1,26 @@
 package com.muvit.MUVIT.infrastructure.helpers;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import com.muvit.MUVIT.util.enums.RolEnum;
 
-import org.springframework.http.MediaType;
-
-
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-
-
 import lombok.AllArgsConstructor;
-import lombok.var;
 
 
 @Component
 @AllArgsConstructor
 public class EmailHelper {
 
-
+    @Autowired 
     private final JavaMailSender mailSender;
 
     // Enviar el EMAIL
