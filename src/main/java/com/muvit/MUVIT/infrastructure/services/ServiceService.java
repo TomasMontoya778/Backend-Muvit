@@ -177,6 +177,13 @@ public class ServiceService implements IServiceService {
         return service.map(this::entityToResponse);
     }
 
+    
+    @Override
+    public Page<ServiceResponse> getAllActiveService(Pageable pageable) {
+        Page<ServiceEntity> service = objServiceRepository.getAllActiveService(pageable);
+        return service.map(this::entityToResponse);
+    }
+
     private User findUser(String id) {
         return this.objUserRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("No se encontró el ID del usuario"));
