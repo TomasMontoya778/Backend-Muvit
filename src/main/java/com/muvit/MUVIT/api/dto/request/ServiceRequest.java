@@ -39,5 +39,6 @@ public class ServiceRequest {
     private String user;
     private String driver;
     private String paymentMethod;
+    private String size;
 
 }

@@ -131,12 +131,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserResponse getByEmail(String email) {
+    public UserResponse getByUserEmail(String email) {
         return this.entityToResponse(this.findEmail(email));
     }
 
     private User findEmail(String email) {
-        return this.objUserRepository.findByEmail(email).orElseThrow(()-> new  BadRequestException("No hay registros con el ID suministrado")));
+        return this.objUserRepository.findByUserEmail(email);
     }
 
 }
