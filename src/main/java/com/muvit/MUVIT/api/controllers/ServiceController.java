@@ -24,6 +24,7 @@ import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 import com.muvit.MUVIT.api.error_handler.response.ErrorResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
+import com.muvit.MUVIT.util.enums.BodyEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -142,15 +143,17 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByDriverId(driverId, pageable));
     }
 
-    @GetMapping(path = "/available-service")
+    @GetMapping(path = "available-service/{size}/{assistant}")
     public ResponseEntity<Page<ServiceResponse>> getAvailableServiceByParamsDriver(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size) {
+            @RequestParam(defaultValue = "3") int sizePage,
+            @PathVariable String size, 
+            @PathVariable int assistant) {
         if (page < 0) {
             page = 0;
         }
-        Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(this.serviceService.getAvailableServiceByDriverParams(pageable));
+        Pageable pageable = PageRequest.of(page, sizePage);
+        return ResponseEntity.ok(this.serviceService.getAvailableServiceByDriverParams(size, assistant, pageable));
     }
 
 }

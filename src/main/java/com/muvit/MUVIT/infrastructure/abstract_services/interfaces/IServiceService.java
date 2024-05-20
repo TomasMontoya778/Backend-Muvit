@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
+import com.muvit.MUVIT.util.enums.BodyEnum;
 
 public interface IServiceService extends CrudService<ServiceRequest, ServiceResponse, String> {
     public ServiceResponse getById(String id);
