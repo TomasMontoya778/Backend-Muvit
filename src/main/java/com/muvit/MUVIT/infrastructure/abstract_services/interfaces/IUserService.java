@@ -5,4 +5,5 @@ import com.muvit.MUVIT.api.dto.response.UserResponse;
 
 public interface IUserService extends CrudService<UserRequest,UserResponse,String>{
         public UserResponse getById(String id);
+        public UserResponse getByUserEmail(String email);
 }
