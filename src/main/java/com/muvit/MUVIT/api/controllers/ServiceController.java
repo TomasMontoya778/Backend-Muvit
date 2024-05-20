@@ -130,7 +130,7 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getAllActiveService(pageable));
     }
 
-    @Operation(summary = "This endpoint retrieves all inactive services of a user.", description = "A user can have multiple inactive services as their requested services are completed, so it will fetch the inactive services based on the user ID and whether the user has inactive services; This works to implement a service history system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
+    @Operation(summary = "This endpoint retrieves all inactive services of a driver.", description = "A driver can have multiple inactive services as their requested services are completed, so it will fetch the inactive services based on the user ID and whether the user has inactive services; This works to implement a service history system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
     @GetMapping(path = "/driver/{driverId}/inactive-service")
     public ResponseEntity<Page<ServiceResponse>> getInactiveServiceByDriverId(@Validated @PathVariable String driverId,
             @RequestParam(defaultValue = "0") int page,
@@ -141,4 +141,16 @@ public class ServiceController {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByDriverId(driverId, pageable));
     }
+
+    @GetMapping(path = "/available-service")
+    public ResponseEntity<Page<ServiceResponse>> getAvailableServiceByParamsDriver(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+        if (page < 0) {
+            page = 0;
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(this.serviceService.getAvailableServiceByDriverParams(pageable));
+    }
+
 }

@@ -196,4 +196,12 @@ public class ServiceService implements IServiceService {
         Page<ServiceEntity> driverServices = this.objServiceRepository.findInactiveServiceByDriverId(driverId, pageable);
         return driverServices.map(this::entityToResponse);
     }
+
+    @Override
+    public Page<ServiceResponse> getAvailableServiceByDriverParams(String size, int assistant, Pageable pageable) {
+        ServiceEntity service = new ServiceEntity();
+        Page<ServiceEntity> availableService = this.objServiceRepository.getAvailableServiceByDriverParams(size, assistant, pageable);
+        return availableService.map(this::entityToResponse);
+    }
+    
 }

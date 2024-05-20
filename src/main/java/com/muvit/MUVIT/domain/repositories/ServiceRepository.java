@@ -25,4 +25,8 @@ public interface ServiceRepository extends JpaRepository<ServiceEntity, String>{
 
     @Query(value = "select s from service s JOIN s.id_driver d WHERE d.id_driver = :driverId AND s.statusService = 'INACTIVE'")
     Page<ServiceEntity> findInactiveServiceByDriverId(@Param("driverId") String driverId, Pageable pageable);
+
+    @Query(value = "select s from service s WHERE s.size = :size AND s.assistant = :assistant AND s.statusService = 'AVAILABLE'")
+    Page<ServiceEntity> getAvailableServiceByDriverParams(@Param("size") String size, @Param("assistant") int assistant ,Pageable pageable);
+
 }
