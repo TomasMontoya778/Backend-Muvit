@@ -110,7 +110,6 @@ public class ServiceService implements IServiceService {
         }
         userResponse.setRol(rolBasic);
         serviceResponse.setUser(userResponse);
-        serviceResponse.setDriver(driverResponse);
         serviceResponse.setSize(serviceEntity.getSize());
 
         return serviceResponse;
@@ -160,7 +159,6 @@ public class ServiceService implements IServiceService {
             String status = serviceRequest.getStatusService();
             objService.setStatusService(StateServiceEnum.valueOf(status));
         }
-        objService.setId_driver(driver);
         objService.setId_user(user);
         System.out.println(objService);
         return objService;
@@ -210,4 +208,13 @@ public class ServiceService implements IServiceService {
                 pageable);
         return driverServices.map(this::entityToResponse);
     }
+
+    @Override
+    public Page<ServiceResponse> getAvailableServiceByDriverParams(String size, int assistant, Pageable pageable) {
+        BodyEnum sizeEnum = BodyEnum.valueOf(size);
+        Page<ServiceEntity> availableService = this.objServiceRepository.getAvailableServiceByDriverParams(sizeEnum, assistant, pageable);
+        System.out.println(availableService);
+        return availableService.map(this::entityToResponse);
+    }
+    
 }

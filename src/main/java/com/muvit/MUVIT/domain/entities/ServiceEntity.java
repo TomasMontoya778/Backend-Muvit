@@ -53,6 +53,7 @@ public class ServiceEntity {
     @Column(nullable = false)
     private PaymentMethods payment;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private BodyEnum size;
 
     /* Foreign Keys */
