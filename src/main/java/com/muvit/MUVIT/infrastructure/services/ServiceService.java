@@ -84,29 +84,31 @@ public class ServiceService implements IServiceService {
         UserToServiceResponse userResponse = new UserToServiceResponse();
         BeanUtils.copyProperties(serviceEntity.getId_user(), userResponse);
         BasicRolResponse rolBasic = this.rolToBasicRolResponse(serviceEntity.getId_user().getRol());
-        BasicRolResponse rolBasicDriver = this.rolToBasicRolResponse(serviceEntity.getId_driver().getRol());
-        DriverBasicResponse driverResponse = new DriverBasicResponse();
-        List<TruckDriverResponse> truckList = new ArrayList<>();
-        Driver driver = serviceEntity.getId_driver();
-        if (driver.getTruck() != null) {
-            for (Truck truck : driver.getTruck()) {
-                TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
-                truckResponse.setId(truck.getId());
-                truckResponse.setBody(truck.getBody());
-                truckResponse.setModel(truck.getModel());
-                truckResponse.setSoat(truck.getSoat());
-                truckResponse.setTecnomecanica(truck.getTecnomecanica());
-                truckResponse.setLicensePlate(truck.getLicensePlate());
-                truckList.add(truckResponse);
+        if (serviceEntity.getId_driver() != null) {
+            BasicRolResponse rolBasicDriver = this.rolToBasicRolResponse(serviceEntity.getId_driver().getRol());
+            DriverBasicResponse driverResponse = new DriverBasicResponse();
+            List<TruckDriverResponse> truckList = new ArrayList<>();
+            Driver driver = serviceEntity.getId_driver();
+            if (driver.getTruck() != null) {
+                for (Truck truck : driver.getTruck()) {
+                    TruckDriverResponse truckResponse = entityToTruckDriverResponse(truck);
+                    truckResponse.setId(truck.getId());
+                    truckResponse.setBody(truck.getBody());
+                    truckResponse.setModel(truck.getModel());
+                    truckResponse.setSoat(truck.getSoat());
+                    truckResponse.setTecnomecanica(truck.getTecnomecanica());
+                    truckResponse.setLicensePlate(truck.getLicensePlate());
+                    truckList.add(truckResponse);
+                }
             }
+            driverResponse.setTruck(truckList);
+            BeanUtils.copyProperties(driver, driverResponse);
+            BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
+            driverResponse.setRol(rolBasicDriver);
+            serviceResponse.setDriver(driverResponse);
         }
-        driverResponse.setTruck(truckList);
-        BeanUtils.copyProperties(driver, driverResponse);
-        BeanUtils.copyProperties(serviceEntity.getId_driver(), driverResponse);
         userResponse.setRol(rolBasic);
-        driverResponse.setRol(rolBasicDriver);
         serviceResponse.setUser(userResponse);
-        serviceResponse.setDriver(driverResponse);
         return serviceResponse;
     }
 
@@ -129,8 +131,11 @@ public class ServiceService implements IServiceService {
     private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
         User user = this.objUserRepository.findById(serviceRequest.getUser())
                 .orElseThrow(() -> new BadRequestException("It doesn't found any id."));
-        Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
-                .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
+        if(serviceRequest.getDriver() != null){
+            Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
+            .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
+            objService.setId_driver(driver);
+        }
         objService.setTypeService(serviceRequest.getTypeService());
         objService.setDistance(serviceRequest.getDistance());
         objService.setAssistant(serviceRequest.getAssistant());
@@ -143,7 +148,6 @@ public class ServiceService implements IServiceService {
         objService.setPayment(PaymentMethods.valueOf(payment));
         String status = serviceRequest.getStatusService();
         objService.setStatusService(StateServiceEnum.valueOf(status));
-        objService.setId_driver(driver);
         objService.setId_user(user);
         System.out.println(objService);
         return objService;
@@ -192,6 +196,4 @@ public class ServiceService implements IServiceService {
         Page<ServiceEntity> driverServices = this.objServiceRepository.findInactiveServiceByDriverId(driverId, pageable);
         return driverServices.map(this::entityToResponse);
     }
-
-    
 }

@@ -24,6 +24,7 @@ import com.muvit.MUVIT.api.dto.request.ServiceRequest;
 import com.muvit.MUVIT.api.dto.response.ServiceResponse;
 import com.muvit.MUVIT.api.error_handler.response.ErrorResponse;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
+import com.muvit.MUVIT.util.exceptions.BadRequestException;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -64,6 +65,10 @@ public class ServiceController {
     @PostMapping
     public ResponseEntity<ServiceResponse> insert(
             @Validated @RequestBody ServiceRequest serviceRequest) {
+                if(serviceRequest.getDriver() != null){
+                    BadRequestException error = new BadRequestException("...");
+                    throw error;
+                }
         return ResponseEntity.ok(this.serviceService.create(serviceRequest));
     }
 
