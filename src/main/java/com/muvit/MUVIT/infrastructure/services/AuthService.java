@@ -20,6 +20,7 @@ import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.RolRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IAuthService;
+import com.muvit.MUVIT.infrastructure.helpers.EmailHelper;
 import com.muvit.MUVIT.infrastructure.helpers.JwtService;
 import com.muvit.MUVIT.util.enums.DNITypeEnum;
 import com.muvit.MUVIT.util.enums.RolEnum;
@@ -48,6 +49,9 @@ public class AuthService implements IAuthService{
     @Autowired
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    private final EmailHelper emailHelper;
+    
     @Override
     public AuthResp login(LoginRolRequest request) {
      try {
@@ -111,7 +115,9 @@ public class AuthService implements IAuthService{
         .rol(objRol)
         .assistants(new ArrayList<>())
         .build();
-
+        if(objDriver.getEmail() != null){
+            emailHelper.sendEmial(objDriver.getEmail(), objDriver.getName(), objDriver.getRol().getNameUser(), objDriver.getRol().getRolEnum());
+        }
         this.objDriverRepository.save(objDriver);
         return AuthResp
         .builder()
@@ -134,7 +140,9 @@ public class AuthService implements IAuthService{
         .lastName(request.getLastName())
         .userService(new ArrayList<>())
         .build();
-
+        if(client.getEmail() != null){
+            emailHelper.sendEmial(client.getEmail(), client.getName(), client.getRol().getNameUser(), client.getRol().getRolEnum());
+        }
         this.objUserRepository.save(client);
 
         return AuthResp
