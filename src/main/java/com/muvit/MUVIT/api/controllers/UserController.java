@@ -44,6 +44,10 @@ public class UserController {
 
         return ResponseEntity.ok(this.userService.getAll(page - 1, size));
     }
+    @GetMapping(path = "/{email}")
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email){
+        return ResponseEntity.ok(this.userService.getByEmail(email));
+    }
 
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))

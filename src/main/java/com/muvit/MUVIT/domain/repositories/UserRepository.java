@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.muvit.MUVIT.domain.entities.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>{
+public interface UserRepository extends JpaRepository<User, String> {
+    User findByEmail(String email);
 }
