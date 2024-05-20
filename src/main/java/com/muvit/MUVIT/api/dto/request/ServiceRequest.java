@@ -25,15 +25,15 @@ public class ServiceRequest {
     private int assistant;
     @NotNull(message = "Price of the service is required")
     private Double price;
-    // @NotBlank(message = "Start point is required")
+    @NotBlank(message = "Start point is required")
     private String startPoint;
-    // @NotBlank(message = "Final point is required")
+    @NotBlank(message = "Final point is required")
     private String finalPoint;
     @NotNull(message = "The Date is required")
     private LocalDate date;
     @NotNull(message = "The time is required")
     private LocalTime time;
-    // @NotNull(message = "Status of the service is required")
+    @NotNull(message = "Status of the service is required")
     private String statusService;
     @NotBlank(message = "The user id is required")
     private String user;

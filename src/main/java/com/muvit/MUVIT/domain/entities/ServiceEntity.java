@@ -61,6 +61,6 @@ public class ServiceEntity {
     private User id_user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_driver", referencedColumnName = "id_driver")
+    @JoinColumn(name = "id_driver", referencedColumnName = "id_driver", nullable = true)
     private Driver id_driver;
 }
