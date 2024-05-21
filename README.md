@@ -39,7 +39,12 @@ Solicitud de Servicio:
 Los clientes pueden ingresar detalles del acarreo, como punto de recogida y destino, tipo de bienes, y cualquier requerimiento especial.
 La aplicación calcula una estimación de costos basada en la distancia, el tipo de bien, y otros factores relevantes.
 Asignación de Transportista:
-
+Beneficios de la Aplicación
+### Conveniencia:
+Solicitud de acarreos rápida y sin complicaciones.
+Eficiencia: Optimización de rutas y disponibilidad de trabajo para transportistas.
+Transparencia: Costos y estado del acarreo claros y accesibles.
+Seguridad: Ambiente seguro y confiable gracias a verificaciones y calificaciones.
 Utilizando algoritmos de emparejamiento, la aplicación busca el transportista disponible más cercano y adecuado para el acarreo solicitado.
 Los transportistas reciben una notificación y pueden aceptar o rechazar la solicitud.
 Pago y Facturación:
