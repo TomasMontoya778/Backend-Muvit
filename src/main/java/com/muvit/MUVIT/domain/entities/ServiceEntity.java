@@ -51,6 +51,7 @@ public class ServiceEntity {
     @Column(nullable = false)
     private LocalTime time;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentMethods payment;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

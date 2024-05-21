@@ -134,9 +134,9 @@ public class ServiceService implements IServiceService {
     private ServiceEntity requestToEntity(ServiceRequest serviceRequest, ServiceEntity objService) {
         User user = this.objUserRepository.findById(serviceRequest.getUser())
                 .orElseThrow(() -> new BadRequestException("It doesn't found any id."));
-        if(serviceRequest.getDriver() != null){
+        if (serviceRequest.getDriver() != null) {
             Driver driver = this.objDriverRepository.findById(serviceRequest.getDriver())
-            .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
+                    .orElseThrow(() -> new BadRequestException("It doesn't found any id"));
             objService.setId_driver(driver);
         }
         objService.setTypeService(serviceRequest.getTypeService());
@@ -147,10 +147,8 @@ public class ServiceService implements IServiceService {
         objService.setFinalPoint(serviceRequest.getFinalPoint());
         objService.setDate(serviceRequest.getDate());
         objService.setTime(serviceRequest.getTime());
-        if (serviceRequest.getSize() != null) {
-            String size = serviceRequest.getSize();
-            objService.setSize(BodyEnum.valueOf(size));
-        }
+        String size = serviceRequest.getSize();
+        objService.setSize(BodyEnum.valueOf(size));
         if (serviceRequest.getPaymentMethod() != null) {
             String payment = serviceRequest.getPaymentMethod();
             objService.setPayment(PaymentMethods.valueOf(payment));
@@ -212,9 +210,10 @@ public class ServiceService implements IServiceService {
     @Override
     public Page<ServiceResponse> getAvailableServiceByDriverParams(String size, int assistant, Pageable pageable) {
         BodyEnum sizeEnum = BodyEnum.valueOf(size);
-        Page<ServiceEntity> availableService = this.objServiceRepository.getAvailableServiceByDriverParams(sizeEnum, assistant, pageable);
+        Page<ServiceEntity> availableService = this.objServiceRepository.getAvailableServiceByDriverParams(sizeEnum,
+                assistant, pageable);
         System.out.println(availableService);
         return availableService.map(this::entityToResponse);
     }
-    
+
 }

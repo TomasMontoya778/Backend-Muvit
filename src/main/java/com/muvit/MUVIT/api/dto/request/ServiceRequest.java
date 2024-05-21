@@ -39,6 +39,7 @@ public class ServiceRequest {
     private String user;
     private String driver;
     private String paymentMethod;
+    @NotBlank(message = "size is required")
     private String size;
 
 }

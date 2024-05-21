@@ -71,7 +71,6 @@ public class AssistService implements IAssisService{
     private AssistRes entityToAssistRes(Assistant objAssistant){
         AssistRes response = new AssistRes();
         AssistToDriverResp driverResponse = new AssistToDriverResp();
-
         BeanUtils.copyProperties(objAssistant.getDriver(), driverResponse);
         BeanUtils.copyProperties(objAssistant, response);
         response.setDriver(driverResponse);
