@@ -42,12 +42,14 @@ Asignación de Transportista:
 Beneficios de la Aplicación
 ### Conveniencia:
 Solicitud de acarreos rápida y sin complicaciones.
-Eficiencia: Optimización de rutas y disponibilidad de trabajo para transportistas.
-Transparencia: Costos y estado del acarreo claros y accesibles.
-Seguridad: Ambiente seguro y confiable gracias a verificaciones y calificaciones.
+Eficiencia: Optimización de rutas y disponibilidad de trabajo para transportistas.</br>
+Transparencia: Costos y estado del acarreo claros y accesibles.</br>
+Seguridad: Ambiente seguro y confiable gracias a verificaciones y calificaciones.</br>
 Utilizando algoritmos de emparejamiento, la aplicación busca el transportista disponible más cercano y adecuado para el acarreo solicitado.
 Los transportistas reciben una notificación y pueden aceptar o rechazar la solicitud.
-Pago y Facturación:
+
+
+### Pago y Facturación:
 
 La aplicación ofrece múltiples métodos de pago (tarjeta de crédito, débito, transferencias electrónicas).
 Al finalizar el acarreo, se genera automáticamente una factura detallada para el cliente
