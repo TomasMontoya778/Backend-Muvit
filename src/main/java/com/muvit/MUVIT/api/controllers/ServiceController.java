@@ -143,6 +143,7 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByDriverId(driverId, pageable));
     }
 
+    @Operation(summary  = "This endpoint retrieves all the active services to the driver", description = "A driver can have multiple active services to work, so it will fetch the active services based on the user ID and whether the user has active services; This works to implement a system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
     @GetMapping(path = "available-service/{size}/{assistant}")
     public ResponseEntity<Page<ServiceResponse>> getAvailableServiceByParamsDriver(
             @RequestParam(defaultValue = "0") int page,
