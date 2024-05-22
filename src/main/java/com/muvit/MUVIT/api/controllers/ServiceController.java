@@ -66,10 +66,6 @@ public class ServiceController {
     @PostMapping
     public ResponseEntity<ServiceResponse> insert(
             @Validated @RequestBody ServiceRequest serviceRequest) {
-                if(serviceRequest.getDriver() != null){
-                    BadRequestException error = new BadRequestException("...");
-                    throw error;
-                }
         return ResponseEntity.ok(this.serviceService.create(serviceRequest));
     }
 
@@ -105,8 +101,9 @@ public class ServiceController {
         return serviceResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
     @ApiResponse(responseCode = "400", description = "When the user's ID is wrong.", content = {
-        @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })
     @Operation(summary = "This endpoint retrieves all inactive services of a user.", description = "A user can have multiple inactive services as their requested services are completed, so it will fetch the inactive services based on the user ID and whether the user has inactive services; This works to implement a service history system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
     @GetMapping(path = "/user/{userId}/inactive-service")
@@ -119,6 +116,7 @@ public class ServiceController {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByUserId(userId, pageable));
     }
+
     @Operation(summary = "This EndPoint gets all registered actives sevices, it also has a paging function that only displays depending on the page and listing size.", description = "you must send the page and corresponding size to list the actives services")
     @GetMapping(path = "/actives-services")
     public ResponseEntity<Page<ServiceResponse>> getAllActiveService(
@@ -143,12 +141,12 @@ public class ServiceController {
         return ResponseEntity.ok(this.serviceService.getInactiveServiceByDriverId(driverId, pageable));
     }
 
-    @Operation(summary  = "This endpoint retrieves all the active services to the driver", description = "A driver can have multiple active services to work, so it will fetch the active services based on the user ID and whether the user has active services; This works to implement a system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
+    @Operation(summary = "This endpoint retrieves all the active services to the driver", description = "A driver can have multiple active services to work, so it will fetch the active services based on the user ID and whether the user has active services; This works to implement a system with pagination functionality. For this, you need to input the page size and the number of services you want to list.")
     @GetMapping(path = "available-service/{size}/{assistant}")
     public ResponseEntity<Page<ServiceResponse>> getAvailableServiceByParamsDriver(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int sizePage,
-            @PathVariable String size, 
+            @PathVariable String size,
             @PathVariable int assistant) {
         if (page < 0) {
             page = 0;

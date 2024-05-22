@@ -14,7 +14,7 @@ import com.muvit.MUVIT.util.enums.BodyEnum;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<ServiceEntity, String> {
-    @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'ACTIVE'")
+    @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'AVAILABLE'")
     Optional<ServiceEntity> findActiveServiceByUserId(@Param("userId") String userId);
 
     @Query(value = "select s from service s JOIN s.id_user u WHERE u.id = :userId AND s.statusService = 'INACTIVE'")
@@ -27,6 +27,7 @@ public interface ServiceRepository extends JpaRepository<ServiceEntity, String> 
     Page<ServiceEntity> findInactiveServiceByDriverId(@Param("driverId") String driverId, Pageable pageable);
 
     @Query(value = "select s from service s WHERE s.size = :size AND s.assistant = :assistant AND s.statusService = 'AVAILABLE'")
-    Page<ServiceEntity> getAvailableServiceByDriverParams(@Param("size") BodyEnum size, @Param("assistant") int assistant ,Pageable pageable);
+    Page<ServiceEntity> getAvailableServiceByDriverParams(@Param("size") BodyEnum size,
+            @Param("assistant") int assistant, Pageable pageable);
 
 }
