@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "98c9088e-44cf-440d-9dcc-3fe4997b5a93",
+		"name": "MUVIT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34450327"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Samuel\",\r\n    \"lastName\": \"Rodríguez Sepúlveda\",\r\n    \"email\": \"samuelchimuelR13@gmail.com\",\r\n    \"phoneNumber\": \"3021332213\",\r\n    \"rol\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/b023fab1-b3c6-4b67-b9a6-d66f955b27f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"b023fab1-b3c6-4b67-b9a6-d66f955b27f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Elizabeth\",\r\n    \"lastName\": \"Beltrán Rodríguez\",\r\n    \"email\": \"elizaBeltrán04@gmail.com\",\r\n    \"phoneNumber\": \"300443231\",\r\n    \"rol\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/5dd814bc-927f-4ac2-a238-d294c5e51923",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"5dd814bc-927f-4ac2-a238-d294c5e51923"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}user/03db3f85-26ab-460c-9372-7f611fb45c7b",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"03db3f85-26ab-460c-9372-7f611fb45c7b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Truck",
+			"item": [
+				{
+					"name": "saveTruck",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"Arus ZX2\",\r\n    \"soat\": \"2023-07-14\",\r\n    \"tecnomecanica\": \"2023-07-14\",\r\n    \"body\": \"MEDIUM\",\r\n    \"licensePlate\": \"TUR954\",\r\n    \"id_driver\": \"5368f59b-010f-4208-9c13-879f5a7e375c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}truck",
+							"host": [
+								"{{url}}truck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTruck",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}truck",
+							"host": [
+								"{{url}}truck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTruckById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}truck/16baf347-4324-4175-b995-b4c3213cd9eb",
+							"host": [
+								"{{url}}truck"
+							],
+							"path": [
+								"16baf347-4324-4175-b995-b4c3213cd9eb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTruck",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}truck/6ef27627-ee81-48f9-af06-f4b409765b11",
+							"host": [
+								"{{url}}truck"
+							],
+							"path": [
+								"6ef27627-ee81-48f9-af06-f4b409765b11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTruck",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"Mitsubishi CV21\",\r\n    \"soat\": \"2024-01-23\",\r\n    \"tecnomecanica\": \"2024-01-24\",\r\n    \"body\": \"XL\",\r\n    \"licensePlate\": \"TWA285\",\r\n    \"id_driver\": \"d7625d94-4982-4192-804e-902bb9f28de2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}truck/0901f4ea-7551-4ff7-99f4-44cbd72a855f",
+							"host": [
+								"{{url}}truck"
+							],
+							"path": [
+								"0901f4ea-7551-4ff7-99f4-44cbd72a855f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "saveService",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"typeService\": \"PREMIUN\",\r\n    \"distance\": \"19 KM\",\r\n    \"assistant\": 5,\r\n    \"price\": 20.50,\r\n    \"startPoint\": \"Santander\",\r\n    \"finalPoint\": \"Cordoba\",\r\n    \"date\": \"2024-05-21\",\r\n    \"time\": \"15:50:00\",\r\n    \"statusService\": \"PENDING\",\r\n    \"user\": \"5dd814bc-927f-4ac2-a238-d294c5e51923\",\r\n    \"size\": \"MEDIUM\",\r\n    \"paymentMethod\": \"CASH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}service",
+							"host": [
+								"{{url}}service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/730d4720-9498-47a9-bd98-e33bd919c6e0",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"730d4720-9498-47a9-bd98-e33bd919c6e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllService",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service",
+							"host": [
+								"{{url}}service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteService",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/e28ad312-8cbc-4bc1-b51e-7cef55d3e6f0",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"e28ad312-8cbc-4bc1-b51e-7cef55d3e6f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateService",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"typeService\": \"PREMIUN\",\r\n    \"driver\": \"5368f59b-010f-4208-9c13-879f5a7e375c\",\r\n    \"distance\": \"19 KM\",\r\n    \"assistant\": 5,\r\n    \"price\": 20.50,\r\n    \"startPoint\": \"Santander\",\r\n    \"finalPoint\": \"Cordoba\",\r\n    \"date\": \"2024-05-21\",\r\n    \"time\": \"15:50:00\",\r\n    \"statusService\": \"PENDING\",\r\n    \"user\": \"5dd814bc-927f-4ac2-a238-d294c5e51923\",\r\n    \"size\": \"MEDIUM\",\r\n    \"paymentMethod\": \"CASH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}service/980df02d-5076-4d4c-b8b7-0c41fc663b48",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"980df02d-5076-4d4c-b8b7-0c41fc663b48"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getServiceByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/user/03db3f85-26ab-460c-9372-7f611fb45c7b/active-service",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"user",
+								"03db3f85-26ab-460c-9372-7f611fb45c7b",
+								"active-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getiNACTIVEServiceByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/user/7abd2f7e-55eb-4a2e-b3d7-74ae250a0369/inactive-service",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"user",
+								"7abd2f7e-55eb-4a2e-b3d7-74ae250a0369",
+								"inactive-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getiNACTIVEServiceByDriver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/driver/b6a74702-211e-4717-8fbf-08e122d5fe98/inactive-service",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"driver",
+								"b6a74702-211e-4717-8fbf-08e122d5fe98",
+								"inactive-service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllActiveServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/actives-services",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"actives-services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAvailableServiceByParamsDriver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/available-service/XL/5?size&page",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"available-service",
+								"XL",
+								"5"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPendingServiceByParamsDriver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}service/pending-service/XL/5",
+							"host": [
+								"{{url}}service"
+							],
+							"path": [
+								"pending-service",
+								"XL",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}driver",
+							"host": [
+								"{{url}}driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveDriver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Samuel\",\n    \"lastName\": \"Moreno Alvare\",\n    \"dni_type\": \"cedulaCiudadania\",\n    \"dni\": \"100032324\",\n    \"phoneNumber\": \"300324231\",\n    \"email\": \"samuelR13S14@gmail.com\",\n    \"rol\": 8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}driver",
+							"host": [
+								"{{url}}driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDriver",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}driver/29643a80-6576-4fbd-8e7c-962939bea2ef",
+							"host": [
+								"{{url}}driver"
+							],
+							"path": [
+								"29643a80-6576-4fbd-8e7c-962939bea2ef"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rol",
+			"item": [
+				{
+					"name": "getRol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}rol/get",
+							"host": [
+								"{{url}}rol"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveRol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameUser\": \"SamuelElChimuel\",\r\n    \"password\": \"@chimuelSamuelR13@.\",\r\n    \"rolEnum\": \"Driver\",\r\n    \"userPhoto\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}rol",
+							"host": [
+								"{{url}}rol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}rol/2",
+							"host": [
+								"{{url}}rol"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRol",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameUser\": \"julianito69xDxD\",\r\n    \"password\": \"@julianito69xDxD\",\r\n    \"rolEnum\": \"Driver\",\r\n    \"userPhoto\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}rol/6",
+							"host": [
+								"{{url}}rol"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRolById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}rol/6",
+							"host": [
+								"{{url}}rol"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registerDriver",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hernan\",\r\n    \"lastName\": \"alvare\",\r\n    \"email\": \"alvaremoreno111@gmail.com\",\r\n    \"phoneNumber\": \"30300324\",\r\n    \"nameUser\": \"hernan1772\",\r\n    \"password\": \"@hernan123\",\r\n    \"dni_type\":\"pasaporte\",\r\n    \"dni\": \"100102231\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}auth/register/driver",
+					"host": [
+						"{{url}}auth"
+					],
+					"path": [
+						"register",
+						"driver"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080/api/v1/",
+			"type": "string"
+		}
+	]
+}
