@@ -1,7 +1,6 @@
 
 # MUVIT
 
-Deploy local [link](#deploy-local)
 
 ## Authors
 
