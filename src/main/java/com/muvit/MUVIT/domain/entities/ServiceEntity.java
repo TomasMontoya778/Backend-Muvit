@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.enums.ServicesEnum;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
+import com.muvit.MUVIT.util.enums.BodyEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +52,9 @@ public class ServiceEntity {
     private LocalTime time;
     @Column(nullable = false)
     private PaymentMethods payment;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BodyEnum size;
 
     /* Foreign Keys */
     @ManyToOne(fetch = FetchType.LAZY)

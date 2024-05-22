@@ -70,7 +70,6 @@ public class TruckController {
         this.truckService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
     @ApiResponse(responseCode = "400", description = "When the ID is wrong.", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
     })

@@ -32,6 +32,7 @@ import com.muvit.MUVIT.domain.repositories.DriverRepository;
 import com.muvit.MUVIT.domain.repositories.ServiceRepository;
 import com.muvit.MUVIT.domain.repositories.UserRepository;
 import com.muvit.MUVIT.infrastructure.abstract_services.interfaces.IServiceService;
+import com.muvit.MUVIT.util.enums.BodyEnum;
 import com.muvit.MUVIT.util.enums.PaymentMethods;
 import com.muvit.MUVIT.util.enums.StateServiceEnum;
 import com.muvit.MUVIT.util.exceptions.BadRequestException;
@@ -109,6 +110,8 @@ public class ServiceService implements IServiceService {
         }
         userResponse.setRol(rolBasic);
         serviceResponse.setUser(userResponse);
+        serviceResponse.setSize(serviceEntity.getSize());
+
         return serviceResponse;
     }
 
@@ -144,10 +147,18 @@ public class ServiceService implements IServiceService {
         objService.setFinalPoint(serviceRequest.getFinalPoint());
         objService.setDate(serviceRequest.getDate());
         objService.setTime(serviceRequest.getTime());
-        String payment = serviceRequest.getPaymentMethod();
-        objService.setPayment(PaymentMethods.valueOf(payment));
-        String status = serviceRequest.getStatusService();
-        objService.setStatusService(StateServiceEnum.valueOf(status));
+        if (serviceRequest.getSize() != null) {
+            String size = serviceRequest.getSize();
+            objService.setSize(BodyEnum.valueOf(size));
+        }
+        if (serviceRequest.getPaymentMethod() != null) {
+            String payment = serviceRequest.getPaymentMethod();
+            objService.setPayment(PaymentMethods.valueOf(payment));
+        }
+        if (serviceRequest.getStatusService() != null) {
+            String status = serviceRequest.getStatusService();
+            objService.setStatusService(StateServiceEnum.valueOf(status));
+        }
         objService.setId_user(user);
         System.out.println(objService);
         return objService;
@@ -193,7 +204,17 @@ public class ServiceService implements IServiceService {
 
     @Override
     public Page<ServiceResponse> getInactiveServiceByDriverId(String driverId, Pageable pageable) {
-        Page<ServiceEntity> driverServices = this.objServiceRepository.findInactiveServiceByDriverId(driverId, pageable);
+        Page<ServiceEntity> driverServices = this.objServiceRepository.findInactiveServiceByDriverId(driverId,
+                pageable);
         return driverServices.map(this::entityToResponse);
     }
+
+    @Override
+    public Page<ServiceResponse> getAvailableServiceByDriverParams(String size, int assistant, Pageable pageable) {
+        BodyEnum sizeEnum = BodyEnum.valueOf(size);
+        Page<ServiceEntity> availableService = this.objServiceRepository.getAvailableServiceByDriverParams(sizeEnum, assistant, pageable);
+        System.out.println(availableService);
+        return availableService.map(this::entityToResponse);
+    }
+    
 }
