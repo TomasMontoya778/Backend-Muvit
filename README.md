@@ -94,8 +94,14 @@ Con el repositorio frontend abierto en VS, ejecutar LiverServer para tener el fr
 
 
 **ALGUNAS FUNCIONALIDADES BACKEND NO ESTAN IMPLEMENTADAS EN EL FRONTEND**
+
+
 **TODOS LOS ENDPOINT SE PUEDEN PROBAR DESDE POSTMAN O SWAGGER**
+
+
 **COLECCION DE POSTMAN** : (https://github.com/tm7778/Backend-Muvit/blob/main/MUVIT.postman_collection.json)
+
+**PARA PROBAR EL SPRINGSECURITY Y EL ENVIO DE CORREOS HAY QUE CAMBIAR DE RAMA EN EL BACKEND feature/spring-security**
 
 
 
